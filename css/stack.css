@@ -1,0 +1,76 @@
+/* ==========================================================================
+   STACKING SCROLL — every page-block pins, the next one slides over it.
+   The section underneath dims (and, if it is short, scales back slightly).
+   Driven by js/stack.js (sets --stack-dim and the pin offsets).
+   ========================================================================== */
+html {
+  scroll-snap-type: none !important;
+}
+
+/* free, continuous scroll */
+.page-block {
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+}
+
+main {
+  background: #050d1a;
+}
+
+/* shows at the edges when a card scales back */
+
+.page-block.stack-on {
+  position: sticky !important;
+  /* `top` is set per-section in JS (beats #about { position: relative }) */
+  transform-origin: 50% 0;
+  contain: layout paint;
+  will-change: transform;
+}
+
+#projects.page-block.stack-on {
+  contain: layout;
+  will-change: auto;
+}
+
+/* dim overlay that deepens as the next page covers this one */
+.page-block>.stack-dim {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 60;
+  will-change: opacity;
+}
+
+/* keyword tags under section headings */
+.stack-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px auto 0;
+  max-width: 680px;
+}
+
+.stack-chips span {
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  opacity: .75;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-block.stack-on {
+    position: relative !important;
+  }
+
+  .page-block>.stack-dim {
+    display: none;
+  }
+}

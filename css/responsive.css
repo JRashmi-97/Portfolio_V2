@@ -1,0 +1,248 @@
+/* ==========================================================================
+   RESPONSIVE — mobile & tablet refinements for the whole deck.
+   Layered LAST so it can gently override style.css + interactive.css.
+   Every rule below is gated to a small viewport (or a touch device) so the
+   desktop layout and all animations stay byte-for-byte identical on a laptop.
+   Nothing here re-styles an animation — it only resizes / reflows / re-spacing
+   the same components so they fit a phone without changing how they behave.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Scroll-snap: DISABLED on phones — the custom sticky-scroll engine in
+   stack.js manages section transitions itself. Turning on scroll-snap here
+   fights the JS engine and causes the "buffering / hitching" inside every
+   box (Projects, Gallery, Contact). Keep it off at every size.
+   -------------------------------------------------------------------------- */
+@media (max-width: 820px) {
+  html { scroll-snap-type: none !important; }
+  .page-block { scroll-snap-stop: normal; scroll-snap-align: none; }
+}
+
+/* --------------------------------------------------------------------------
+   0b. Compact page-block padding on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .page-block { padding: 60px 0 40px 0; margin-top: -16px; }
+  #hero { padding-top: 92px; padding-bottom: 56px; }
+  #about.page-block { justify-content: flex-start; }
+}
+
+/* --------------------------------------------------------------------------
+   1. Global type & rhythm scale-down
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .section-header { margin-bottom: 28px; }
+  .section-title { font-size: 1.85rem; letter-spacing: -.3px; line-height: 1.2; }
+  .section-subtitle { font-size: .92rem; }
+  .section-tag { font-size: .72rem; letter-spacing: 1.2px; padding: 4px 11px; }
+  .card-title { font-size: 1.18rem; }
+}
+
+@media (max-width: 480px) {
+  .section-title { font-size: 1.62rem; }
+  .section-subtitle { font-size: .92rem; }
+  .section-header { margin-bottom: 28px; }
+}
+
+@media (max-width: 380px) {
+  .section-title { font-size: 1.42rem; }
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero-container { gap: 6px; width: 100%; padding: 0 16px; box-sizing: border-box; flex-direction: column; align-items: center; }
+  .hero-content, .hero-visual { min-width: 0; overflow: visible; }
+  .hero-title { font-size: 2.5rem; }
+  .hero-role { font-size: 1.5rem; gap: 10px; }
+  .hero-ghost { top: 6%; font-size: clamp(58px, 17vw, 92px); }
+  .hero-description { font-size: .92rem; max-width: 100%; line-height: 1.55; overflow-wrap: break-word; margin-bottom: 18px; }
+  .hero-status-pill { font-size: .78rem; max-width: 100%; white-space: normal; }
+  .hero-visual { margin-top: 0; }
+  .hero-stats-row { margin-top: 22px; }
+}
+
+@media (max-width: 560px) {
+  /* keep 2×2 stats grid — override style.css single-column collapse */
+  .hero-stats { grid-template-columns: 1fr 1fr !important; min-width: 0; }
+  .hero-stats-row { flex-direction: column; align-items: stretch; gap: 16px; }
+  .hs-cell { padding: 14px 12px; min-width: 0; overflow-wrap: break-word; }
+  .hs-num { font-size: 1.4rem; }
+  .hs-label { font-size: .76rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 2.05rem; letter-spacing: -.5px; }
+  .hero-role { font-size: 1.16rem; }
+  .hs-cell { padding: 12px 10px; }
+  .hs-num { font-size: 1.25rem; }
+  .hs-label { font-size: .72rem; }
+}
+
+@media (max-width: 380px) {
+  .hero-title { font-size: 1.8rem; }
+}
+
+/* --------------------------------------------------------------------------
+   3. ABOUT
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .about-card { padding: 22px; }
+  .main-bio p { font-size: .92rem; line-height: 1.55; }
+  .stat-number { font-size: 1.7rem; }
+  .facts-list { gap: 12px; }
+  .about-head { margin-bottom: 6px; gap: 6px; }
+  /* CRITICAL: in the column-reverse mobile layout, flex-basis 340px becomes the
+     header's HEIGHT → huge empty gap under the subtitle. Reset to auto. */
+  .about-header { flex: 1 1 auto; margin-bottom: 0 !important; }
+  #sleepy-lamp { height: clamp(130px, 32vw, 180px); }
+  .lamp-hint { font-size: .72rem; margin-bottom: 0; }
+}
+
+@media (max-width: 520px) {
+  .about-card { padding: 18px; }
+  .about-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-number { font-size: 1.5rem; }
+  .stat-label { font-size: .78rem; }
+  .facts-list li { gap: 10px; }
+  .facts-list strong { font-size: .88rem; }
+  .facts-list p { font-size: .8rem; }
+  .card-title { font-size: 1.1rem; }
+}
+
+/* torch effect on mobile: light radiates from top-center (where lamp sits) */
+@media (max-width: 760px) {
+  #about::after {
+    background: radial-gradient(80% 55% at 50% 8%, rgba(255,222,140,.28), rgba(255,214,130,.08) 44%, transparent 68%),
+                radial-gradient(90% 60% at 50% 120%, rgba(255,226,160,.06), transparent 60%) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. SKILLS — periodic table
+   -------------------------------------------------------------------------- */
+@media (max-width: 620px) {
+  .pt-top { align-items: flex-start; }
+  .pt-replay { height: 36px; font-size: 12px; }
+  .pt-filters { margin-top: 18px; max-width: 100%; flex-wrap: wrap; border-radius: 18px; }
+  .pt-filters button { padding: 8px 13px; font-size: 13px; }
+  /* the sliding indicator now tracks the button's full box, so it follows
+     chips that wrap onto 2+ rows — no need to hide it on small screens */
+  .pt-board { padding: 14px; border-radius: 20px; }
+  .pt-panel { padding: 18px; border-radius: 20px; }
+  .pt-panel h3 { font-size: 22px; }
+}
+
+@media (max-width: 440px) {
+  .pt-grid { grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 6px; }
+  .pt-face { padding: 6px 7px 5px; border-radius: 12px; }
+  .pt-face b { font-size: 18px; }
+  .pt-face span { font-size: 8.5px; }
+  .pt-face small { font-size: 8px; }
+  .pt-meta { font-size: 10.5px; }
+}
+
+/* --------------------------------------------------------------------------
+   5. EXPERIENCE — flower + milestones (flower already stacks at 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  #experience .timeline { padding-left: 26px; }
+  .timeline-dot { left: -26px; width: 15px; height: 15px; border-width: 3px; }
+  .timeline-card { padding: 20px; }
+  .timeline-role { font-size: 1.16rem; }
+  .timeline-company { font-size: .92rem; }
+  .timeline-desc { font-size: .9rem; }
+  .timeline-item { margin-bottom: 26px; }
+}
+
+@media (max-width: 420px) {
+  .exp-flower { max-width: 260px; }
+  .timeline-card { padding: 16px; }
+  .timeline-role { font-size: 1.05rem; }
+}
+
+/* --------------------------------------------------------------------------
+   6. PROJECTS — cube tunnel + breakout
+   The cube auto-scales via JS (30% of the min viewport side) and the grid
+   collapses to one column at 620px, so only the scroll-trap needs fixing:
+   the full-screen game canvas must let the page scroll vertically on touch.
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .cb-h2 { font-size: clamp(30px, 9vw, 46px); }
+  .cb-sub { font-size: 15px; }
+  .bk-cap { font-size: 11px; }
+  .bk-wrap { height: 55vh; min-height: 360px; }
+}
+
+/* allow vertical page scroll over the game while still steering the paddle */
+@media (hover: none), (max-width: 768px) {
+  .bk-canvas { touch-action: pan-y; cursor: default; }
+}
+
+/* --------------------------------------------------------------------------
+   7. GALLERY — coverflow, controls, modal
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .coverflow-container { padding: 30px 0 12px; }
+  .coverflow-stage { height: 360px; }
+  .coverflow-card { width: 250px; height: 310px; margin-top: -155px; margin-left: -125px; }
+  .coverflow-card img, .coverflow-card .gallery-pdf-thumb { border-radius: 16px; }
+  .cert-filter-btn { font-size: .78rem; padding: 7px 13px; }
+  .coverflow-nav-bar { margin-top: 6px; padding: 12px 0 6px; }
+  .cf-gesture-hint { letter-spacing: 1px; font-size: .62rem; }
+}
+
+@media (max-width: 480px) {
+  .coverflow-stage { height: 320px; }
+  .coverflow-card { width: 218px; height: 276px; margin-top: -138px; margin-left: -109px; }
+  .plate-title { font-size: .92rem; }
+  .cf-nav-btn { width: 42px; height: 42px; }
+  .cf-dash-indicators { max-width: 200px; }
+}
+
+/* let vertical swipes scroll the page while horizontal swipes flip cards */
+@media (hover: none) {
+  .coverflow-stage { touch-action: pan-y; }
+}
+
+/* modal — the two-column body already stacks at 768px; tighten the chrome */
+@media (max-width: 768px) {
+  .cert-modal { padding: 16px; }
+  .cert-modal-close { top: -42px; font-size: 1.9rem; }
+  .cert-modal-info { padding: 22px 20px; }
+  .cert-modal-info h4 { font-size: 1.16rem; }
+}
+
+@media (max-width: 480px) {
+  .cert-modal { padding: 10px; }
+  .cert-modal-body { max-height: 84vh; }
+  .cert-modal-media { min-height: 200px; padding: 12px; }
+  .cert-modal-media img { max-height: 40vh; }
+}
+
+/* --------------------------------------------------------------------------
+   8. CONTACT — arcade, dock (dock auto-fits via JS), share, signature
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .arcade-feature { margin-bottom: 34px; }
+  .arcade-frame { min-height: 240px; border-radius: 16px; }
+  .cd-hint { font-size: .9rem; }
+}
+
+@media (max-width: 480px) {
+  .arcade-head { gap: 12px; }
+  .arcade-title h3 { font-size: 1.2rem; }
+  .arcade-sub { font-size: .9rem; }
+  .arcade-frame { min-height: 200px; }
+  .contact-signature { margin-top: 40px; }
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER
+   -------------------------------------------------------------------------- */
+@media (max-width: 560px) {
+  .footer { padding: 34px 0; }
+  .footer-container { flex-direction: column; text-align: center; gap: 14px; }
+  .copyright { font-size: .82rem; }
+}

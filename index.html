@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rashmi | Full-Stack Developer & AI/ML Engineer</title>
+  <meta name="description" content="Portfolio of Rashmi - BCA student at GGSIPU (CGPA 9.45), Full-Stack Developer and AI/ML Engineer with IBM & NASSCOM internship, national hackathon wins, and 30+ verified credentials.">
+  
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Anton&family=Playwrite+US+Trad:wght@100..400&family=JetBrains+Mono:wght@500&family=Nunito:wght@800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=20261105o">
+  <!-- Interactive sections: Skills periodic table, Projects cube tunnel, Pixel Breakout -->
+  <link rel="stylesheet" href="css/interactive.css?v=20261105o">
+  <!-- Mobile / tablet responsive refinements (layered last, desktop untouched) -->
+  <link rel="stylesheet" href="css/responsive.css?v=20261105o">
+  <link rel="stylesheet" href="css/stack.css?v=20261105o">
+  <link rel="stylesheet" href="css/projects.css?v=20261105o">
+  <!-- PERF: loaded last. Parks off-screen animation work, no design changes -->
+  <link rel="stylesheet" href="css/perf.css?v=20261105o">
+
+  <!-- No-JS fallback: hide intro, show hero -->
+  <noscript><style>.intro{display:none!important}#cursor-dot{display:none!important}.brand-script{opacity:1!important;pointer-events:auto!important}.brand-script .brand-word{clip-path:none!important}.brand-script .brand-pen{display:none!important}.hero-status-pill,.hero-title,.hero-role,.hero-description,.hero-stats,.dr-wrap{opacity:1!important;animation:none!important}.hero-arch{opacity:1!important;transform:none!important}.arch-plate{opacity:1!important}.role-rot>span:first-child{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+
+  <!-- Intro: % count + pencil-drawn ring → cursive "hello" → pixel circle-wipe reveal -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <canvas class="intro-cover" id="intro-cover"></canvas>
+    <div class="intro-stage">
+      <div class="intro-count" id="intro-count">0%</div>
+      <svg class="intro-ring" viewBox="-60 -60 120 120" aria-hidden="true">
+        <circle r="44" fill="none" stroke="rgba(139,178,204,.4)" stroke-width="1.2"/>
+        <g id="intro-pen"></g>
+      </svg>
+      <svg class="intro-hello" viewBox="0 0 360 200" aria-hidden="true">
+        <defs><mask id="hm"><rect id="hr" x="0" y="0" width="0" height="200" fill="#fff"/></mask></defs>
+        <text class="intro-script" x="180" y="128" text-anchor="middle" font-size="92" mask="url(#hm)">hello</text>
+        <g id="hello-pen" opacity="0"><g transform="rotate(22)"><rect x="-6" y="-72" width="12" height="54" rx="2" fill="#0277bd"/><rect x="-6" y="-72" width="4" height="54" fill="#8bb2cc" opacity=".6"/><rect x="-6.5" y="-24" width="13" height="7" rx="1.5" fill="#decbb3"/><polygon points="0,0 -6,-17 6,-17" fill="#EAD9A6"/><polygon points="0,0 -2.4,-6.5 2.4,-6.5" fill="#3a352a"/></g></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Cursive wordmark (beside the nav, left) + trailing cursor dot -->
+  <a class="brand-script script" href="#hero" id="brand-script" aria-label="Rashmi Jaiswal — back to top" title="Watch the intro again"><span class="brand-word">Rashmi Jaiswal</span></a>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Floating "hill" navigation -->
+  <div class="floating-nav" id="floating-nav">
+    <nav class="hill-nav" id="hill-nav" role="tablist" aria-label="Primary">
+      <div class="hn-tabs" id="hn-tabs">
+        <a class="hn-tab" role="tab" href="#hero" title="Home" aria-label="Home" data-subtitle="Everything, in one place."><svg class="hn-ic" viewBox="0 0 24 24"><path class="solid" d="M4 11.2 12 4l8 7.2V19a1.5 1.5 0 0 1-1.5 1.5h-3.8V15a1 1 0 0 0-1-1h-3.4a1 1 0 0 0-1 1v5.5H5.5A1.5 1.5 0 0 1 4 19z"/></svg><span class="hn-txt">Home</span></a>
+        <a class="hn-tab" role="tab" href="#about" title="About" aria-label="About" data-subtitle="Get to know who I am."><svg class="hn-ic" viewBox="0 0 24 24"><circle class="solid" cx="12" cy="8" r="3.6"/><path class="solid" d="M5 20v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/></svg><span class="hn-txt">About</span></a>
+        <a class="hn-tab" role="tab" href="#skills" title="Skills" aria-label="Skills" data-subtitle="Technologies I work with."><svg class="hn-ic" viewBox="0 0 24 24"><rect class="solid" x="6.5" y="6.5" width="11" height="11" rx="2.6"/><rect class="cut" x="10" y="10" width="4" height="4" rx="0.9"/><path d="M9.5 3.6v2.9M14.5 3.6v2.9M9.5 17.5v2.9M14.5 17.5v2.9M3.6 9.5h2.9M3.6 14.5h2.9M17.5 9.5h2.9M17.5 14.5h2.9"/></svg><span class="hn-txt">Skills</span></a>
+        <a class="hn-tab" role="tab" href="#experience" title="Experience" aria-label="Experience" data-subtitle="My professional journey."><svg class="hn-ic" viewBox="0 0 24 24"><rect class="solid" x="3.6" y="7.5" width="16.8" height="12" rx="2.2"/><path d="M9 7.5V6a1.6 1.6 0 0 1 1.6-1.6h2.8A1.6 1.6 0 0 1 15 6v1.5"/><path class="cut" d="M3.6 12.4h16.8"/></svg><span class="hn-txt">Experience</span></a>
+        <a class="hn-tab" role="tab" href="#projects" title="Projects" aria-label="Projects" data-subtitle="Things I have built."><svg class="hn-ic" viewBox="0 0 24 24"><path class="solid" d="M3.6 6.6a1.6 1.6 0 0 1 1.6-1.6h3.9l2 2.3h7.7a1.6 1.6 0 0 1 1.6 1.6v8.5a1.6 1.6 0 0 1-1.6 1.6H5.2a1.6 1.6 0 0 1-1.6-1.6z"/></svg><span class="hn-txt">Projects</span></a>
+        <a class="hn-tab" role="tab" href="#gallery" title="Gallery" aria-label="Gallery" data-subtitle="Visuals and captures."><svg class="hn-ic" viewBox="0 0 24 24"><rect class="solid" x="3.6" y="4.8" width="16.8" height="14.4" rx="2.4"/><circle class="cut" cx="9" cy="10" r="1.6"/><path class="cut" d="m4.8 17.4 4.4-4.4a1.6 1.6 0 0 1 2.2 0l2.3 2.3 2.9-2.9a1.6 1.6 0 0 1 2.2 0l1.2 1.2"/></svg><span class="hn-txt">Gallery</span></a>
+        <a class="hn-tab" role="tab" href="#contact" title="Contact" aria-label="Contact" data-subtitle="Let’s get in touch."><svg class="hn-ic" viewBox="0 0 24 24"><rect class="solid" x="3.6" y="5.4" width="16.8" height="13.2" rx="2.4"/><path class="cut" d="m4.8 7.4 6.3 4.9a1.7 1.7 0 0 0 1.8 0l6.3-4.9"/></svg><span class="hn-txt">Contact</span></a>
+      </div>
+      <svg class="hn-hill" id="hn-hill" aria-hidden="true"><path id="hn-hp"/></svg>
+      <span class="hn-bead" id="hn-bead"></span>
+    </nav>
+  </div>
+
+  <main>
+    
+    <!-- =========================================================================
+         PAGE 1: HERO SECTION
+         Background: Light Beige | Font & Accents: Dark Blue
+         ========================================================================= -->
+    <section class="page-block theme-light-beige" id="hero">
+      <div class="hero-ghost" aria-hidden="true">DEVELOPER</div>
+      <div class="container hero-container">
+        <div class="hero-content">
+          
+          <div class="hero-status-pill">
+            <span class="status-indicator"></span>
+            <span>Seeking Full-Stack & AI/ML Opportunities</span>
+          </div>
+
+          <!-- Complete Merged Resume Headline (No role switcher) -->
+          <svg class="liquid-defs" aria-hidden="true" focusable="false">
+            <filter id="liquidRipple" x="-20%" y="-45%" width="140%" height="190%">
+              <feTurbulence id="liquidTurb" type="fractalNoise" baseFrequency="0 0.012" numOctaves="2" seed="3" result="noise" />
+              <feDisplacementMap id="liquidDisp" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </svg>
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Rashmi</span>
+          </h1>
+
+          <p class="hero-role"><span class="role-line" aria-hidden="true"></span><span class="role-rot" id="role-rot"><span class="cur">Full-Stack Developer</span><span>AI/ML Engineer</span><span>Hackathon Top-5 Finisher</span><span>Best Paper Presenter</span></span></p>
+
+          <p class="hero-description">
+            BCA '27 at <strong>GGSIPU Delhi</strong> (CGPA 9.45) and <strong>AI/ML intern at IBM &amp; NASSCOM</strong>. I ship real-time web apps, fine-tune transformer models, and take ideas all the way to a deployed API.
+          </p>
+
+          <div class="hero-stats-row">
+          <div class="hero-stats">
+            <div class="hs-cell">
+              <div class="hs-num">9.45</div>
+              <div class="hs-label">CGPA in BCA at GGSIPU</div>
+            </div>
+            <div class="hs-cell">
+              <div class="hs-num">500+</div>
+              <div class="hs-label">concurrent users handled</div>
+            </div>
+            <div class="hs-cell">
+              <div class="hs-num">Top 5</div>
+              <div class="hs-label">WWT All-India Hackathon</div>
+            </div>
+            <div class="hs-cell">
+              <div class="hs-num">Best Paper</div>
+              <div class="hs-label">ICNSF 2026 presenter award</div>
+            </div>
+          </div>
+
+          <div class="dr-wrap">
+            <div class="dr-item" id="dr-item">
+              <button class="dr-btn" id="dr-btn" type="button" aria-label="Download resume (PDF)"></button>
+              <div class="dr-name">Download Resume</div>
+              <div class="dr-sub">One-page CV &middot; PDF</div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- Portrait arch: drop a photo at assets/photo/rashmi.png and it takes over this frame -->
+          <div class="hero-arch" id="hero-arch">
+            <span class="arch-mark" aria-hidden="true">R</span>
+            <span class="arch-hint" aria-hidden="true">portrait goes here</span>
+          </div>
+          <div class="hero-badge" aria-hidden="true">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="58" fill="#02132b"/>
+              <defs><path id="heroBadgePath" d="M60 60m-42 0a42 42 0 1 1 84 0a42 42 0 1 1-84 0"/></defs>
+              <text fill="#cfe3ff" font-size="10" font-weight="700" letter-spacing="1.6" font-family="'JetBrains Mono', ui-monospace, monospace"><textPath href="#heroBadgePath">FULL-STACK &#8226; AI/ML &#8226; DELHI &#8226;</textPath></text>
+              <circle cx="60" cy="60" r="14" fill="#f7f3ec"/>
+              <circle cx="60" cy="60" r="5.5" fill="#02132b"/>
+            </svg>
+          </div>
+          <span class="arch-plate" aria-hidden="true">DELHI &middot; CLASS OF 2027</span>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PAGE 2: ABOUT SECTION (Floats up with Dark Blue Background & Light Beige Text)
+         ========================================================================= -->
+    <section class="page-block theme-dark-blue" id="about">
+      <div class="container">
+        <div class="about-head">
+          <div class="section-header about-header">
+            <span class="section-tag"><i class="fa-solid fa-user"></i> Professional Profile</span>
+            <h2 class="section-title">Innovation &amp; Algorithmic Rigor</h2>
+            <p class="section-subtitle">Scalable full-stack architecture meets state-of-the-art deep learning.</p>
+          </div>
+          <div class="about-lamp">
+            <svg id="sleepy-lamp" viewBox="0 20 290 300" role="button" tabindex="0" aria-pressed="true" aria-label="Table lamp. Press to switch it on or off.">
+              <defs>
+                <linearGradient id="slCone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe28c" stop-opacity=".2"/><stop offset="1" stop-color="#ffe28c" stop-opacity=".3"/></linearGradient>
+                <radialGradient id="slPool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff0b4" stop-opacity=".62"/><stop offset=".6" stop-color="#ffe392" stop-opacity=".26"/><stop offset="1" stop-color="#ffe392" stop-opacity="0"/></radialGradient>
+                <radialGradient id="slHalo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffeaa8" stop-opacity=".42"/><stop offset="1" stop-color="#ffeaa8" stop-opacity="0"/></radialGradient>
+                <linearGradient id="slShOn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bdb5e1"/><stop offset=".55" stop-color="#ab9ecd"/><stop offset="1" stop-color="#9886bd"/></linearGradient>
+                <linearGradient id="slShOff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40404c"/><stop offset="1" stop-color="#2f2f39"/></linearGradient>
+                <linearGradient id="slStem" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffeab4"/><stop offset=".45" stop-color="#fdf3d6"/><stop offset="1" stop-color="#e9e8ee"/></linearGradient>
+                <radialGradient id="slBead" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfcdd8"/></radialGradient>
+                <filter id="slBlur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="2.6"/></filter>
+              </defs>
+              <circle cx="142.5" cy="150" r="108" fill="#1c2a55" opacity=".13"/>
+              <g class="sl-light sl-on-only">
+                <polygon points="79,174 205.6,174 257,296 29.7,296" fill="url(#slCone)"/>
+                <ellipse cx="142.3" cy="289" rx="114" ry="19" fill="url(#slPool)"/>
+              </g>
+              <ellipse cx="142.3" cy="258" rx="46" ry="9" fill="#000" opacity=".28"/>
+              <g class="sl-on-only"><ellipse cx="142.3" cy="253" rx="45.5" ry="11" fill="#d9d7df"/><ellipse cx="142.3" cy="251.5" rx="36" ry="7" fill="#efeef3"/></g>
+              <g class="sl-off-only"><ellipse cx="142.3" cy="253" rx="45.5" ry="11" fill="#535159"/><ellipse cx="142.3" cy="251.5" rx="36" ry="7" fill="#5a595e"/></g>
+              <rect class="sl-on-only" x="135.2" y="168" width="14.3" height="84" rx="2" fill="url(#slStem)"/>
+              <rect class="sl-off-only" x="135.2" y="168" width="14.3" height="84" rx="2" fill="#616065"/>
+              <g class="sl-head" id="sl-head">
+                <ellipse class="sl-on-only" cx="142.3" cy="172" rx="78" ry="12" fill="url(#slHalo)"/>
+                <path class="sl-on-only" fill="url(#slShOn)" d="M111 55.4H174Q182.7 55.4 184.6 64L205.6 165Q206.6 170.5 201 170.5H83.6Q78 170.5 79.2 165L100.8 64Q102.7 55.4 111 55.4Z"/>
+                <path class="sl-off-only" fill="url(#slShOff)" d="M111 55.4H174Q182.7 55.4 184.6 64L205.6 165Q206.6 170.5 201 170.5H83.6Q78 170.5 79.2 165L100.8 64Q102.7 55.4 111 55.4Z"/>
+                <g class="sl-on-only"><path d="M84 169.6H201" stroke="#ffe9a8" stroke-width="6" stroke-linecap="round" opacity=".6" filter="url(#slBlur)"/><path d="M83.5 169.4H201.5" stroke="#fff1c4" stroke-width="2.4" stroke-linecap="round"/></g>
+                <g class="sl-on-only">
+                  <path d="M111 135Q122.6 123 134.2 135M149.5 135Q161.1 123 172.7 135" fill="none" stroke="#2b2a47" stroke-width="3.5" stroke-linecap="round"/>
+                  <ellipse cx="111.9" cy="145.1" rx="5.8" ry="3.6" fill="#d48b9c" opacity=".78"/><ellipse cx="172.8" cy="145.1" rx="5.8" ry="3.6" fill="#d48b9c" opacity=".78"/>
+                  <path d="M131.7 144.6Q142.2 147.2 152.6 144.6Q152.4 158 142.2 158Q132 158 131.7 144.6Z" fill="#231e3d"/>
+                  <ellipse cx="142.2" cy="154.5" rx="4.6" ry="3.3" fill="#ff6b4f"/>
+                </g>
+                <g class="sl-off-only">
+                  <path d="M113 128.5Q123 135 133 128.5M152 128.5Q162 135 172 128.5" fill="none" stroke="#e8e6ee" stroke-width="3.2" stroke-linecap="round"/>
+                  <ellipse cx="115" cy="135.5" rx="5.6" ry="3.5" fill="#55525f"/><ellipse cx="173" cy="135.5" rx="5.6" ry="3.5" fill="#55525f"/>
+                  <path d="M135.5 140Q143.5 145.5 151.5 140" fill="none" stroke="#e8e6ee" stroke-width="2.8" stroke-linecap="round"/>
+                </g>
+                <g class="sl-cordwrap" id="sl-cord">
+                  <line class="sl-on-only" x1="170.8" y1="169" x2="170.8" y2="223" stroke="#e5e2e8" stroke-width="2.2" stroke-linecap="round"/>
+                  <line class="sl-off-only" x1="170.8" y1="169" x2="170.8" y2="223" stroke="#74747f" stroke-width="2.2" stroke-linecap="round"/>
+                  <ellipse class="sl-bead sl-on-only" cx="170.8" cy="229.5" rx="5.9" ry="7.5" fill="url(#slBead)"/>
+                  <ellipse class="sl-bead sl-off-only" cx="170.8" cy="229.5" rx="5.9" ry="7.5" fill="#585860"/>
+                </g>
+              </g>
+              <g class="sl-zs"><text class="sl-z" x="165" y="80">z</text><text class="sl-z sl-z2" x="179" y="62">z</text></g>
+            </svg>
+            <span class="lamp-hint"><i class="fa-solid fa-hand-pointer"></i> click the lamp to light up this section</span>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <div class="glass-card about-card main-bio">
+            <h3 class="card-title"><i class="fa-solid fa-sparkles"></i> Background & Vision</h3>
+            <p>
+              BCA student at <strong>GGSIPU, Delhi</strong> — <strong>CGPA 9.45</strong>.
+            </p>
+            <p>
+              I build frontends in React &amp; Angular, backends in Node, Express, .NET and Flask, and fine-tune NLP models (DistilBERT, LSTM, CNN).
+            </p>
+            <p>
+              IBM &amp; NASSCOM AI/ML intern • Best Paper, ICNSF 2026 • Top 5, WWT All-India Hackathon. Clean code that solves real problems.
+            </p>
+            <div class="about-stats">
+              <div class="stat-item">
+                <div class="stat-number">9.45</div>
+                <div class="stat-label">BCA CGPA (GGSIPU)</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Concurrent Users Handled</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">33+</div>
+                <div class="stat-label">Verified Credentials</div>
+              </div>
+            </div>
+          </div>
+
+            <div class="glass-card about-card quick-facts">
+            <h3 class="card-title"><i class="fa-solid fa-bullseye"></i> Key Highlights</h3>
+            <ul class="facts-list">
+              <li>
+                <span class="bullet"><i class="fa-solid fa-check"></i></span>
+                <div>
+                  <strong>Best Paper Presenter - ICNSF 2026</strong>
+                  <p>Published as Chapter 2 of the ICNSF 2026 book (Kunal Books, ISBN 978-93-6389-959-9).</p>
+                </div>
+              </li>
+              <li>
+                <span class="bullet"><i class="fa-solid fa-check"></i></span>
+                <div>
+                  <strong>Global & National Hackathon Finalist</strong>
+                  <p>Top 5 globally — WWT Hackathon. SIH 2026. Winter School winner.</p>
+                </div>
+              </li>
+              <li>
+                <span class="bullet"><i class="fa-solid fa-check"></i></span>
+                <div>
+                  <strong>AIEC Technical Society Leader</strong>
+                  <p>Run the society website. Host inter-college tech events.</p>
+                </div>
+              </li>
+              <li>
+                <span class="bullet"><i class="fa-solid fa-check"></i></span>
+                <div>
+                  <strong>Industry Trained</strong>
+                  <p>Simulations &amp; bootcamps by Deloitte, Oracle and IBM CEP.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PAGE 3: TECHNICAL SKILLS (Floats up with Light Gray Background & Dark Blue Text)
+         ========================================================================= -->
+    <section class="page-block" id="skills">
+      <div class="container pt-wrap">
+        <div class="pt-top">
+          <div>
+            <div class="pt-eyebrow">TECH STACK</div>
+            <h2 class="pt-title">The tools I <em>build</em> with</h2>
+            <p class="pt-sub">Every tool is an element. Filter by family — hover to explore.</p>
+          </div>
+          <button class="pt-replay" id="pt-replay" type="button" aria-label="Replay the intro animation">&#8635; Replay</button>
+        </div>
+        <div class="pt-filters" id="pt-filters" role="tablist" aria-label="Filter by category"><span class="pt-ind" id="pt-ind"></span></div>
+        <div class="pt-layout">
+          <div class="pt-board pre" id="pt-board"><div class="pt-scan" id="pt-scan"></div><div class="pt-grid" id="pt-grid"></div></div>
+          <aside class="pt-panel" id="pt-panel" aria-live="polite"></aside>
+        </div>
+        <div class="pt-meta"><b id="pt-count">0</b> tools &middot; <span id="pt-catn">6</span> families &middot; hover to explore</div>
+      </div>
+    </section>
+    <!-- =========================================================================
+         PAGE 4: EXPERIENCE & EDUCATION (Floats up with Deep Navy & Light Beige Text)
+         ========================================================================= -->
+    <section class="page-block theme-deep-navy" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Experience & Education</span>
+          <h2 class="section-title">Career Milestones</h2>
+          <p class="section-subtitle">Internships, research, training and education — one timeline.</p>
+        </div>
+
+        <div class="exp-grid">
+          <div class="exp-flower">
+            <div class="exp-flower-sticky">
+              <svg id="exp-scene" viewBox="0 0 460 468" preserveAspectRatio="xMidYMax meet" role="img" aria-label="A pink four-petal flower growing among glowing grass; it blooms as your milestones appear. Click to regrow."></svg>
+              <p class="exp-cap"><i class="fa-solid fa-seedling"></i> it grows as the milestones appear &middot; click to replant</p>
+            </div>
+          </div>
+          <div class="exp-timeline">
+        <div class="timeline">
+          <!-- Experience 1: IBM & NASSCOM -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="glass-card timeline-card">
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> Feb 2026 - Mar 2026</span>
+              <h3 class="timeline-role">AI / ML Intern</h3>
+              <h4 class="timeline-company"><i class="fa-solid fa-building"></i> IBM & NASSCOM</h4>
+              <p class="timeline-desc">
+                Built an Emotion Recognition capstone on DistilBERT + TensorFlow. Trained in EDA, REST APIs and model-evaluation pipelines.
+              </p>
+              <div class="timeline-tags">
+                <span class="mini-tag">DistilBERT</span>
+                <span class="mini-tag">TensorFlow</span>
+                <span class="mini-tag">REST APIs</span>
+                <span class="mini-tag">Model Evaluation</span>
+              </div>
+              <div class="tl-links">
+                <a href="certificates/IBMCEP%20PBELAI221IN%20Certificate%20_%20IBMMooc.pdf" target="_blank" rel="noopener"><i class="fa-regular fa-file-certificate"></i> View Certificate</a>
+                <a href="https://github.com/JRashmi-97/Emotions_recognition_AI" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Capstone Code</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hackathons & Competitions -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="glass-card timeline-card">
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2025 - 2026</span>
+              <h3 class="timeline-role">Hackathons &amp; Competitive Coding</h3>
+              <h4 class="timeline-company"><i class="fa-solid fa-trophy"></i> WWT · Hack Horizon · Smart India Hackathon · HackDUCS</h4>
+              <p class="timeline-desc">
+                • <strong>Top 5 Globally — WWT All-India Women's Hackathon (Jul 2025):</strong> AI document translation for women's empowerment.<br>
+                • <strong>Hack Horizon (Apr 2026):</strong> LSTM + spaCy disease-prediction engine — SarvaVaidya.<br>
+                • <strong>SIH 2026</strong>, <strong>HackDUCS</strong> (Delhi University) and IITM "Hack &amp; Block" C/C++.
+              </p>
+              <div class="timeline-tags">
+                <span class="mini-tag">WWT Top 5</span>
+                <span class="mini-tag">SIH 2026</span>
+                <span class="mini-tag">Hack Horizon</span>
+                <span class="mini-tag">HackDUCS</span>
+              </div>
+              <div class="tl-links">
+                <a href="https://voksha-jxoz3x9wf-muskan-kushwahas-projects.vercel.app/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> WWT Live Site</a>
+                <a href="https://github.com/muskan-kushwaha01/SarvaVaidya" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> SarvaVaidya Repo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic: BCA GGSIPU -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="glass-card timeline-card">
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2024 - Jun 2027 (Expected)</span>
+              <h3 class="timeline-role">Bachelor of Computer Applications (BCA)</h3>
+              <h4 class="timeline-company"><i class="fa-solid fa-graduation-cap"></i> Guru Gobind Singh Indraprastha University (GGSIPU), Delhi</h4>
+              <p class="timeline-desc">
+                CGPA <strong>9.45/10</strong>. Core: data structures, algorithms, databases, OOP and web architecture.
+              </p>
+              <div class="timeline-tags">
+                <span class="mini-tag">CGPA 9.45</span>
+                <span class="mini-tag">BCA</span>
+                <span class="mini-tag">GGSIPU</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Research: Best Paper Presenter ICNSF 2026 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="glass-card timeline-card">
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2026</span>
+              <h3 class="timeline-role">Best Paper Presenter Award - ICNSF 2026</h3>
+              <h4 class="timeline-company"><i class="fa-solid fa-award"></i> Academic Research Conference</h4>
+              <p class="timeline-desc">
+                Published as <strong>Chapter 2</strong> in the ICNSF 2026 proceedings book — <em>"From Autonomy to Algorithmic Control"</em>, a review of women's motivation and inequality in the AI-driven gig economy through Self-Determination Theory.
+              </p>
+              <div class="paper-ref" aria-label="APA reference for published book chapter">
+                <span class="paper-ref-tag">APA</span>
+                <p>Rashmi, &amp; Tanwar, A. (2026). From autonomy to algorithmic control: A systematic literature review of women's motivation and inequality in the AI-driven gig economy through self-determination theory. In <em>Next Gen Sustainable Futures: Driving Sustainability through Innovation and Technology</em> (ICNSF 2026) (pp. 12–41). Kunal Books. ISBN 978-93-6389-959-9</p>
+              </div>
+              <div class="timeline-tags">
+                <span class="mini-tag">Best Paper Award</span>
+                <span class="mini-tag">Book Chapter 2</span>
+                <span class="mini-tag">Algorithmic Control</span>
+                <span class="mini-tag">AI Ethics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Training & Certifications -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="glass-card timeline-card">
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2025 - 2026</span>
+              <h3 class="timeline-role">Specialized Summer Training & Corporate Simulations</h3>
+              <h4 class="timeline-company"><i class="fa-solid fa-certificate"></i> Deloitte, Oracle, Summer Training</h4>
+              <p class="timeline-desc">
+                • <strong>Data Science Training (Jul 2025):</strong> end-to-end diabetes prediction model.<br>
+                • <strong>Full-Stack Training (Jul 2026):</strong> Angular, .NET, Postman — applied in PrepIQ.<br>
+                • <strong>Deloitte</strong> job simulation + <strong>Oracle</strong> database course.
+              </p>
+              <div class="timeline-tags">
+                <span class="mini-tag">Data Science</span>
+                <span class="mini-tag">Full-Stack</span>
+                <span class="mini-tag">Deloitte</span>
+                <span class="mini-tag">Oracle</span>
+              </div>
+              <div class="tl-links">
+                <a href="https://github.com/JRashmi-97/diabetes_prediction_system" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Diabetes Model Repo</a>
+                <a href="https://github.com/JRashmi-97/Final_PrepIQ" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> PrepIQ Repo</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schooling: Class XII -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="glass-card timeline-card">
+              <span class="timeline-date"><i class="fa-regular fa-calendar"></i> 2024</span>
+              <h3 class="timeline-role">Senior Secondary Education (Class XII)</h3>
+              <h4 class="timeline-company"><i class="fa-solid fa-school"></i> Sarvodaya Kanya Vidyalaya, Delhi</h4>
+              <p class="timeline-desc">
+                Scored <strong>8.5 CGPA</strong>. Active in tech competitions and public speaking.
+              </p>
+              <div class="timeline-tags">
+                <span class="mini-tag">Class XII</span>
+                <span class="mini-tag">CGPA 8.5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PAGE 5: PROJECTS SHOWCASE — "Enter the Cube" snap-exempt tunnel + Pixel Breakout
+         ========================================================================= -->
+    <section class="page-block" id="projects">
+      <div class="cb-track" id="cb-track">
+        <div class="cb-stage" id="cb-stage" aria-hidden="true">
+          <canvas id="warp"></canvas>
+          <div class="cb-cubewrap"><div class="cb-cube" id="cb-cube"><i class="cb-cface cb-f1"></i><i class="cb-cface cb-f2"></i><i class="cb-cface cb-f3"></i><i class="cb-cface cb-f4"></i><i class="cb-cface cb-f5"></i><i class="cb-cface cb-f6"></i></div></div>
+          <div class="cb-label" id="cb-label"><h3>Step inside</h3><p>Keep scrolling to enter</p></div>
+          <div class="cb-flash" id="cb-flash"></div>
+          <div class="cb-clone" id="cb-clone"><div class="cb-pgrid" id="cb-pgrid"></div><div id="cb-clone-body"></div></div>
+        </div>
+      </div>
+      <div class="cb-projects" id="cb-projects"></div>
+      <div class="bk-wrap" id="bk">
+        <canvas class="bk-canvas" id="bk-canvas" aria-label="Dot-matrix breakout game: move the paddle to bounce the ball and erase the pixels."></canvas>
+        <div class="bk-cap">Break it if you can. It's all pixels. &mdash; <b>Pixel Breakout</b></div>
+        <button class="bk-reset" id="bk-reset" type="button" aria-label="Rebuild the pixels"><i></i><i></i><i></i></button>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PAGE 6: GALLERY SECTION (Floats up with Dark Blue Background & Light Beige Text)
+         ========================================================================= -->
+    <section class="page-block theme-dark-blue" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-photo-film"></i> Verified Credentials</span>
+          <h2 class="section-title">Certificates &amp; Awards</h2>
+          <p class="section-subtitle">
+            33 credentials — hackathons, research, corporate certifications. Click any card to preview.
+          </p>
+        </div>
+
+        <!-- Controls: Search & Category Filter Pills -->
+        <div class="gallery-controls">
+          <div class="gallery-search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="gallery-search" placeholder="Search by name, tag (e.g. SIH, Oracle, Deloitte, Hackathon)...">
+          </div>
+
+          <div class="cert-filter-bar">
+            <button class="cert-filter-btn active" data-filter="all">All Items (33)</button>
+            <button class="cert-filter-btn" data-filter="hackathon">Hackathons & Contests</button>
+            <button class="cert-filter-btn" data-filter="corporate">Corporate & Tech</button>
+            <button class="cert-filter-btn" data-filter="research">Research & Academic</button>
+            <button class="cert-filter-btn" data-filter="award">Awards & Leadership</button>
+            <button class="cert-filter-btn" data-filter="workshop">Bootcamps & Workshops</button>
+          </div>
+                <!-- 3D Coverflow Stage (Matching Reference UI) -->
+        <div class="coverflow-container">
+          <div class="coverflow-stage" id="coverflow-stage">
+            <div class="coverflow-track" id="coverflow-track">
+              
+              <!-- 1. Smart India Hackathon (SIH) -->
+              <div class="coverflow-card" data-category="hackathon" data-tags="sih hackathon government innovation competition national ministry education nexverse" data-file="certificates/sih.jpg" data-title="Smart India Hackathon (SIH) 2026" data-sub="Internal Hackathon • NexVerse IITM • 9 Sep 2026" data-pill="#SIH" data-type="National Hackathon (Participation)" data-org="Ministry of Education, Govt. of India • NexVerse IITM, Janakpuri" data-date="9 September 2026" data-position="Participant — BCA 5th Semester" data-detail="Participated in the Smart India Hackathon (SIH) 2026 Internal Hackathon organized by NexVerse IITM in collaboration with the Department of Computer Science, Institute of Information Technology & Management (IITM), Janakpuri, held on 9th September 2026 under MoE's Innovation Cell, Government of India.">
+                <span class="plate-index-badge">01</span>
+                <img src="certificates/thumb/sih.jpg" alt="Smart India Hackathon" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Smart India Hackathon (SIH)</h3>
+                  <p class="plate-sub">National Hackathon • Ministry of Education</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#SIH</span>
+                    <span class="plate-pill">#NationalWinner</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Hackathon Top 5 -->
+              <div class="coverflow-card" data-category="hackathon" data-tags="hackathon top5 rank global wwt coding finalist women she4code shooting stars" data-file="certificates/hackthon-top5.png" data-title="Top 5 — WWT All-India Women Hackathon" data-sub="She4Code Team • Shooting Stars Foundation & WWT • 13 Jul" data-pill="#Top5Global" data-type="Global Hackathon — Achievement" data-org="Shooting Stars Foundation & World Wide Technology (WWT)" data-date="13 July 2025" data-position="Top 5 Team (of All-India) — She4Code Team" data-detail="This Certificate of Appreciation certifies that Rashmi from the She4Code Team secured a place among the Top 5 Teams in the WWT All India Women Only Hackathon on July 13th, organized by Shooting Stars Foundation and powered by World Wide Technology (WWT). Signed by Latha Narayanan (CEO, Shooting Stars Foundation) and Savitha Gowda (Director HR India, WWT for ALL LEAD).">
+                <span class="plate-index-badge">02</span>
+                <img src="certificates/thumb/hackthon-top5.jpg" alt="Hackathon Top 5" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Top 5 Globally - WWT Hackathon</h3>
+                  <p class="plate-sub">Global Finalist • AI & Translation</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Top5</span>
+                    <span class="plate-pill">#WWT</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Deloitte Job Simulation -->
+              <div class="coverflow-card" data-category="corporate" data-tags="deloitte corporate consulting data analytics forensic simulation forage" data-file="certificates/deloitte.jpg" data-title="Deloitte Data Analytics Job Simulation" data-sub="Certificate of Completion • 26 Dec 2025" data-pill="#Deloitte" data-type="Corporate Job Simulation" data-org="Deloitte (issued via Forage)" data-date="26 December 2025" data-position="Certificate of Completion" data-detail="Rashmi Jaiswal completed the Deloitte Data Analytics Job Simulation, finishing practical tasks in Data Analysis and Forensic Technology over the period of December 2025. Verified by Deloitte CHRO Tina McCreery; issued via Forage with enrolment & user verification codes.">
+                <span class="plate-index-badge">03</span>
+                <img src="certificates/thumb/deloitte.jpg" alt="Deloitte Certificate" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Deloitte Technology Simulation</h3>
+                  <p class="plate-sub">Enterprise Consulting • Deloitte</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Deloitte</span>
+                    <span class="plate-pill">#Consulting</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Oracle Certification -->
+              <div class="coverflow-card" data-category="corporate" data-tags="oracle database sql cloud ai foundations certified associate" data-file="certificates/oracle.jpg" data-title="Oracle Certified Foundations Associate" data-sub="OCI 2025 AI Foundations • 30 Sep 2025" data-pill="#OracleCertified" data-type="Enterprise Certification" data-org="Oracle Corporation / Oracle University" data-date="30 September 2025 (valid till 30 Sep 2027)" data-position="Oracle Certified — Foundations Associate" data-detail="Recognized by Oracle Corporation as Oracle Certified: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate' (Foundations Associate badge). Signed by Damien Carey, Senior Vice President, Oracle University; eCertificate valid until September 30, 2027.">
+                <span class="plate-index-badge">04</span>
+                <img src="certificates/thumb/oracle.jpg" alt="Oracle Certificate" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Oracle Certified Program</h3>
+                  <p class="plate-sub">Relational Databases & SQL • Oracle</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Oracle</span>
+                    <span class="plate-pill">#SQL</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Oracle Batch Certification -->
+              <div class="coverflow-card" data-category="corporate" data-tags="oracle batch badge ai foundations cloud specialization" data-file="certificates/oracle-batch.jpg" data-title="Oracle OCI AI Foundations Digital Badge" data-sub="Foundations Associate • Batch 2025" data-pill="#OracleBadge" data-type="Certification Digital Badge" data-org="Oracle University" data-date="2025" data-position="Foundations Associate — OCI AI Foundations" data-detail="Oracle Certified Foundations Associate digital badge for Oracle Cloud Infrastructure 2025 — AI Foundations, earned through the Oracle batch certification drive at institute level.">
+                <span class="plate-index-badge">05</span>
+                <img src="certificates/thumb/oracle-batch.jpg" alt="Oracle Batch Certificate" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Oracle Batch Specialization</h3>
+                  <p class="plate-sub">Batch Processing & Cloud • Oracle</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Oracle</span>
+                    <span class="plate-pill">#Batch</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. IBM CEP AI Certificate (PDF) -->
+              <div class="coverflow-card" data-category="corporate" data-tags="ibm nasscom ai artificial intelligence intern cloud mooc skillsbuild cep" data-file="certificates/IBMCEP PBELAI221IN Certificate _ IBMMooc.pdf" data-title="IBM CEP — AI Course Certificate (PDF)" data-sub="IBM MOOC • Course PBELAI221IN" data-pill="#IBMAI" data-is-pdf="true" data-type="MOOC Certification (PDF)" data-org="IBM & NASSCOM (IBMMooc / IBM CEP)" data-date="Course ID: PBELAI221IN (India)" data-position="Course Completion Certificate" data-detail="IBM CEP / IBMMooc completion certificate (course code PBELAI221IN) for the Artificial Intelligence programme conducted in association with IBM and NASSCOM — the same track as Rashmi's IBM & NASSCOM AI/ML internship. Click to open the full PDF.">
+                <span class="plate-index-badge">06</span>
+                <div class="gallery-pdf-thumb" style="width:100%; height:100%;">
+                  <div class="pdf-icon-box">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>IBM Certificate (PDF)</span>
+                  </div>
+                </div>
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">IBM AI / ML Specialist</h3>
+                  <p class="plate-sub">Enterprise AI & Cognitive • IBM & NASSCOM</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#IBM</span>
+                    <span class="plate-pill">#AI/ML</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Best Paper Presenter Award -->
+              <div class="coverflow-card" data-category="research" data-tags="best paper research icnsf presentation conference academic award gig economy" data-file="certificates/best-paper.jpg" data-title="Best Paper Award — ICNSF 2026" data-sub="International Conference • IITM Janakpuri • 24 Apr 2026" data-pill="#BestPaper" data-type="International Conference — Best Paper Award" data-org="IITM Janakpuri / ICNSF 2026 (NextGen Sustainable Futures)" data-date="24 April 2026" data-position="Winner — Certificate of Best Paper" data-detail="Awarded to Ms. Rashmi (Student, Institute of Information Technology & Management, GGSIPU) for outstanding contribution and excellence in research through the presentation of the paper 'From Autonomy to Algorithmic Control: A Systematic Literature Review of Women's Motivation and Inequality in the AI-Driven Gig Economy through Self-Determination Theory' at the ICNSF 2026 International Conference, IITM Janakpuri, New Delhi.">
+                <span class="plate-index-badge">07</span>
+                <img src="certificates/thumb/best-paper.jpg" alt="Best Paper Award" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Best Paper Presenter Award</h3>
+                  <p class="plate-sub">Academic Honor • ICNSF 2026</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#BestPaper</span>
+                    <span class="plate-pill">#Research</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8. Paper Presentation Certificate -->
+              <div class="coverflow-card" data-category="research" data-tags="paper presentation conference academic research technical icnsf delegate" data-file="certificates/paper-presentation.jpg" data-title="Certificate of Paper Presentation — ICNSF 2026" data-sub="Research Paper Presented • IITM Janakpuri • 24 Apr 2026" data-pill="#Conference" data-type="International Conference — Paper Presentation" data-org="IITM Janakpuri / ICNSF 2026 (NextGen Sustainable Futures)" data-date="24 April 2026" data-position="Presenter — Research Paper" data-detail="Acknowledges that Ms. Rashmi (Student, IITM, GGSIPU) successfully presented the research paper 'From Autonomy to Algorithmic Control: A Systematic Literature Review of Women's Motivation and Inequality in the AI-Driven Gig Economy through Self-Determination Theory' at the ICNSF 2026 International Conference, with valuable contribution to the research conference.">
+                <span class="plate-index-badge">08</span>
+                <img src="certificates/thumb/paper-presentation.jpg" alt="Paper Presentation" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Technical Paper Presentation</h3>
+                  <p class="plate-sub">Conference Delegate • Academic Panel</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Presentation</span>
+                    <span class="plate-pill">#Conference</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 9. Winter School Workshop Winner -->
+              <div class="coverflow-card" data-category="research" data-tags="winter school deep learning competition winner workshop research neural networks" data-file="certificates/winter-school.jpg" data-title="Winter School — Deep Learning (Podium Finish)" data-sub="5–10 Jan 2026 • Dept. of CS, IITM Delhi" data-pill="#WinterSchool" data-type="Winter School & Competition — Prize Winner" data-org="Department of Computer Science, Institute of Information Technology & Management, Delhi" data-date="05–10 January 2026" data-position="Winner / Runner-Up — Deep Learning Competition" data-detail="Successfully completed the Winter School on 'The Foundations of Deep Learning: Concepts, Models and Applications' and secured a podium position in the Deep Learning Competition conducted during the Winter School, organized by the Department of Computer Science, IITM, Delhi (signed by HOD-CS Prof. Ganesh Wadhwani & Director Prof. Rachita Rana).">
+                <span class="plate-index-badge">09</span>
+                <img src="certificates/thumb/winter-school.jpg" alt="Winter School" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Winter School Project Winner</h3>
+                  <p class="plate-sub">First Prize • Winter School Workshop</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#WinterSchool</span>
+                    <span class="plate-pill">#1stPrize</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 10. Delhi Police Special Initiative -->
+              <div class="coverflow-card" data-category="award" data-tags="delhi police civic self defence sashakti safety women sampark" data-file="certificates/delhi-police.jpg" data-title="Delhi Police — SASHAKTI Self Defence Training" data-sub="1–10 Oct 2024 • Delhi Police West District" data-pill="#DelhiPolice" data-type="Civic Training Programme" data-org="Delhi Police West District — C.P. Cell (SAMPARK)" data-date="1–10 October 2024 (Cert. No. 20849)" data-position="Certificate of Participation — Completed" data-detail="Ms. Rashmi (Student, IITM) successfully completed the 'Self Defence Training' programme under the SASHAKTI Campaign for the Safety of Women and Children from 1st to 10th October 2024, organized by Delhi Police West District, New Delhi. Signed by the Deputy Commissioner of Police, West District.">
+                <span class="plate-index-badge">10</span>
+                <img src="certificates/thumb/delhi-police.jpg" alt="Delhi Police Certificate" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Delhi Police Civic Initiative</h3>
+                  <p class="plate-sub">Civic Safety Tech • Delhi Police</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#DelhiPolice</span>
+                    <span class="plate-pill">#CivicTech</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 11. C Hackathon -->
+              <div class="coverflow-card" data-category="hackathon" data-tags="c language cpp hack block programming algorithms systems coding ititm" data-file="certificates/c-hackthon.jpg" data-title="Hack & Block — C/C++ Competition" data-sub="Software Development Cell, IITM • 6 Nov 2024" data-pill="#CHackathon" data-type="Coding Competition (Participation)" data-org="Software Development Cell, IITM, Janakpuri (GGSIPU)" data-date="6 November 2024" data-position="Participant — Hack & Block" data-detail="This Certificate of Participation is awarded to Rashmi Jaiswal for participating in 'Hack & Block' (C/C++ Programming Competition) organized by the Software Development Cell of IITM on 6th November 2024. IITM is NAAC 'A' accredited, AICTE approved and ranked among Top 70 B-Schools (Times B-Schools Survey 2024).">
+                <span class="plate-index-badge">11</span>
+                <img src="certificates/thumb/c-hackthon.jpg" alt="C Hackathon" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">C Programming Hackathon</h3>
+                  <p class="plate-sub">Algorithmic Systems Contest</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#CLanguage</span>
+                    <span class="plate-pill">#Algorithms</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 12. General Hackathon -->
+              <div class="coverflow-card" data-category="hackathon" data-tags="hackducs sankalan unstop delhi university team unison coding prototype" data-file="certificates/hackthon.jpg" data-title="HackDUCS Hackathon — SANKALAN 2026" data-sub="Team Unison • DoCS, University of Delhi" data-pill="#HackDUCS" data-type="Inter-University Hackathon" data-org="Department of Computer Science (DoCS), University of Delhi — via Unstop" data-date="SANKALAN 2026" data-position="Participant — Team Unison (GGSIPU)" data-detail="Certificate of Participation certifying that Rashmi from Guru Gobind Singh Indraprastha University (GGSIPU), Delhi, as Team Unison, participated in the HackDUCS Hackathon of SANKALAN 2026 organized by the Department of Computer Science (DoCS), University of Delhi (DU).">
+                <span class="plate-index-badge">12</span>
+                <img src="certificates/thumb/hackthon.jpg" alt="Hackathon" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Inter-College Hackathon</h3>
+                  <p class="plate-sub">Rapid Prototyping & Sprint</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Hackathon</span>
+                    <span class="plate-pill">#Prototyping</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 13. HTML Bootcamp -->
+              <div class="coverflow-card" data-category="workshop" data-tags="html css web development frontend bootcamp lets upgrade nsdc gdg" data-file="certificates/html-bootcamp.jpg" data-title="HTML CSS Bootcamp — Let's Upgrade" data-sub="9–14 Sep 2024 (6 Days) • Cert. LUeHTMLSEP124749" data-pill="#HTML5" data-type="6-Day Skill Bootcamp" data-org="Let's Upgrade (in collaboration with NSDC, ITM Edutech & GDG MAD)" data-date="9–14 September 2024 (issued 16 Sep 2024)" data-position="Successfully Completed" data-detail="Rashmi successfully completed the 6-day HTML CSS Bootcamp (9–14 September 2024) with Let's Upgrade, in collaboration with NSDC, ITM Edutech Training Pvt. Ltd. and GDG MAD. Certificate No. LUeHTMLSEP124749, verifiable at letsupgrade.in/verify.">
+                <span class="plate-index-badge">13</span>
+                <img src="certificates/thumb/html-bootcamp.jpg" alt="HTML Bootcamp" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">HTML & Web Dev Bootcamp</h3>
+                  <p class="plate-sub">Responsive Frontend UI Architecture</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#HTML5</span>
+                    <span class="plate-pill">#WebDev</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 14. Ducat Workshop -->
+              <div class="coverflow-card" data-category="workshop" data-tags="ducat power bi workshop business intelligence dashboards it training" data-file="certificates/Ducat-workshop.jpg" data-title="Ducat Workshop — Power BI" data-sub="1-Day Workshop • 10 Feb 2025 • IITM Janakpuri" data-pill="#Ducat" data-type="1-Day Technical Workshop" data-org="Ducat The IT Training School (ISO 9001:2000)" data-date="10 February 2025" data-position="Certificate of Completion — Power BI" data-detail="Certificate of Completion presented to Rashmi for successfully completing Ducat's 1-day hands-on workshop on Power BI (business intelligence & dashboards), held at IITM, Janakpuri on 2025-02-10.">
+                <span class="plate-index-badge">14</span>
+                <img src="certificates/thumb/Ducat-workshop.jpg" alt="Ducat Workshop" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Ducat Hands-On Tech Workshop</h3>
+                  <p class="plate-sub">Practical Software Engineering</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Ducat</span>
+                    <span class="plate-pill">#HandsOn</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 15. Techno Sapiens Symposium -->
+              <div class="coverflow-card" data-category="workshop" data-tags="techno sapiens 2k25 techno quest symposium tech fest competition brain power" data-file="certificates/Techno sapiens.jpg" data-title="Techno Sapiens 2K25 — Techno Quest" data-sub="7–8 Feb 2025 • Dept. of CS & IIC, IITM" data-pill="#TechnoSapiens" data-type="Tech Fest — Quiz Competition Participation" data-org="Department of Computer Science & Institute Incubation Center (IIC), IITM" data-date="7–8 February 2025" data-position="Participant — Techno Quest (BCA Sem II)" data-detail="Certificate of Participation proudly presented to Rashmi, student of IITM (BCA, Semester II), for participating in the 'Techno Quest' event at Techno Sapiens 2K25 — 'Unleash Your Brain Power', held on 7th–8th February, organized by the Department of Computer Science in collaboration with the Institute Incubation Center (IIC) of IITM.">
+                <span class="plate-index-badge">15</span>
+                <img src="certificates/thumb/Techno%20sapiens.jpg" alt="Techno Sapiens" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Techno Sapiens Symposium</h3>
+                  <p class="plate-sub">Tech Exhibition & Competitions</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Symposium</span>
+                    <span class="plate-pill">#TechFest</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 16. Techno Sapiens Second Cert -->
+              <div class="coverflow-card" data-category="award" data-tags="techno sapiens 2k26 coordinator aiec appreciation organizing leadership" data-file="certificates/techno-sapiens.jpg" data-title="Techno Sapiens 2K26 — Coordinator Appreciation" data-sub="2–3 Feb 2026 • AIEC, Dept. of CS, IITM" data-pill="#Coordinator" data-type="Tech Fest — Organizing Role" data-org="AIEC & Department of Computer Science, IITM Janakpuri (AI Experience Center)" data-date="2–3 February 2026" data-position="Coordinator — Certificate of Appreciation" data-detail="Sincere appreciation expressed to Rashmi for outstanding contribution and dedicated efforts as a Coordinator in Techno Sapiens 2K26, held on 2–3 February 2026, organized by AIEC, Department of Computer Science, Institute of Information Technology & Management, Janakpuri. Signed by AIEC Convener Ms. Komal Sharma, HOD(CS) Dr. Ganesh Wadhwani and Director Prof. Rachita Rana.">
+                <span class="plate-index-badge">16</span>
+                <img src="certificates/thumb/techno-sapiens.jpg" alt="Techno Sapiens Award" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Techno Sapiens Award of Merit</h3>
+                  <p class="plate-sub">Innovation & Demonstration</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#AwardOfMerit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 17. Model United Nations (MUN) -->
+              <div class="coverflow-card" data-category="award" data-tags="mun model united nations 3mung diplomacy leadership public speaking debate internware" data-file="certificates/mun.jpg" data-title="3MUNg — Model United Nations (Third Edition)" data-sub="13–14 Nov 2024 • InternWare, IITM Janakpuri" data-pill="#MUN" data-type="Model United Nations Conference" data-org="InternWare — Internship Cell, IITM, Janakpuri" data-date="13–14 November 2024" data-position="Delegate — Certificate of Participation" data-detail="This certifies that Rashmi actively participated in 3MUNg — 'Minds in Motion', the Model United Nations Third Edition, organized by InternWare - Internship Cell, IITM, Janakpuri on November 13th–14th, 2024. Signed by Dr. Mandeep Singh (Manager T&P), Ms. Dishita Gera (Secretary General), Mr. Shubh Sharma (Director General) and Prof. Rachita Rana (Director, IITM).">
+                <span class="plate-index-badge">17</span>
+                <img src="certificates/thumb/mun.jpg" alt="MUN Certificate" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Model United Nations (MUN)</h3>
+                  <p class="plate-sub">Diplomacy & Committee Leadership</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#MUN</span>
+                    <span class="plate-pill">#Diplomacy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 18. Advanced Excel Course -->
+              <div class="coverflow-card" data-category="workshop" data-tags="excel data analysis formulas pivot great learning online course analytics" data-file="certificates/excel-course.jpg" data-title="Excel Tips and Tricks — Great Learning" data-sub="Free Online Course • Great Learning Academy" data-pill="#Excel" data-type="Online Course Completion" data-org="Great Learning Academy" data-date="4 November 2021" data-position="Certificate of Completion" data-detail="Presented to Rashmi for successfully completing the free online course 'Excel Tips and Tricks' provided by Great Learning Academy — covering spreadsheet formulas, data handling and reporting essentials.">
+                <span class="plate-index-badge">18</span>
+                <img src="certificates/thumb/excel-course.jpg" alt="Excel Course" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Advanced Excel & Analytics</h3>
+                  <p class="plate-sub">Formulas, Pivot & Statistical Models</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Excel</span>
+                    <span class="plate-pill">#Analytics</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 19. Master Teacher Award -->
+              <div class="coverflow-card" data-category="award" data-tags="master teacher award fea mentorship teaching peer leadership freedom employability" data-file="certificates/master-teacher-award.jpg" data-title="FEA Master Teacher Award — Module 8" data-sub="11 Mar 2022 • Freedom Employability Academy" data-pill="#MasterTeacher" data-type="Communication Program — Peer Teaching Award" data-org="Freedom Employability Academy (FEA) — Innovations in Poverty Alleviation" data-date="11 March 2022" data-position="Master Teacher Award (Module-8)" data-detail="Awarded to Rashmi Jaiswal for contributions towards fostering peer learning and creating an engaging learning environment in Module-8 of the Freedom Employability Academy program. Signed by Pinki Gupta, DL Facilitator (FEAGraduate.org).">
+                <span class="plate-index-badge">19</span>
+                <img src="certificates/thumb/master-teacher-award.jpg" alt="Master Teacher Award" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Master Teacher Award</h3>
+                  <p class="plate-sub">Peer Mentorship & Instructional Clarity</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#TeacherAward</span>
+                    <span class="plate-pill">#Mentorship</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 20. Journeyman Award -->
+              <div class="coverflow-card" data-category="award" data-tags="language wizard journeyman spoken english best performer fea scholastic cup" data-file="certificates/journeyman-award.jpg" data-title="Language Wizard Award — Journeyman" data-sub="26 Mar 2022 • FEA Scholastic Cup (Modules 6–9)" data-pill="#BestPerformer" data-type="Spoken English — Best Performer Award" data-org="Freedom Employability Academy (FEA)" data-date="26 March 2022" data-position="Journeyman Level — Adjudged Best Performer" data-detail="Rashmi Jaiswal was awarded the Language Wizard Award (Journeyman level, Scholastic Cup Modules 6–9) for demonstrating competence in spoken English and being adjudged the best performer. Signed by Pinki Gupta, DL Facilitator.">
+                <span class="plate-index-badge">20</span>
+                <img src="certificates/thumb/journeyman-award.jpg" alt="Journeyman Award" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Journeyman Skill Award</h3>
+                  <p class="plate-sub">Technical Proficiency Milestone</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#SkillMilestone</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 21. Longranger Award -->
+              <div class="coverflow-card" data-category="award" data-tags="lone ranger award disputation debate best individual fea advanced program" data-file="certificates/longranger-award.jpg" data-title="Lone Ranger Award — Best Individual Performance" data-sub="6 Apr 2022 • Disputation Contest, Module 10, FEA" data-pill="#LoneRanger" data-type="Debate Contest — Individual Excellence Award" data-org="Freedom Employability Academy (FEA)" data-date="6 April 2022" data-position="Best Individual Performance — Disputation Contest" data-detail="Rashmi Jaiswal won the Lone Ranger Award for Best Individual Performance in the Disputation Contest (debate), Module 10 of the FEA Advanced Program (English, Personal Skills & MOOCs). Signed by Pinki Gupta, DL Facilitator.">
+                <span class="plate-index-badge">21</span>
+                <img src="certificates/thumb/longranger-award.jpg" alt="Longranger Award" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Longranger Milestone Award</h3>
+                  <p class="plate-sub">Consistency & Unwavering Delivery</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Endurance</span>
+                    <span class="plate-pill">#Excellence</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 22. Quizee Competition -->
+              <div class="coverflow-card" data-category="hackathon" data-tags="quizee proprofs technical quiz trivia contest score achievement" data-file="certificates/quizee.jpg" data-title="ProProfs Quiz — Certificate of Achievement" data-sub="12 Sep 2024 • Score 71.43% • Best Award" data-pill="#QuizAce" data-type="Online Technical Quiz — Achievement" data-org="ProProfs Quiz Maker" data-date="12 September 2024" data-position="Score: 71.43 / 100 — Best Award badge" data-detail="Certificate of Achievement proudly presented to Rashmi for scoring 71.43/100 (71.43%) on a ProProfs technical quiz, recognized with the Best Award badge.">
+                <span class="plate-index-badge">22</span>
+                <img src="certificates/thumb/quizee.jpg" alt="Quizee" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Quizee Technical Challenge</h3>
+                  <p class="plate-sub">Algorithms & Tech Trivia</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Quiz</span>
+                    <span class="plate-pill">#Algorithms</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 23. Celestia 1.0 -->
+              <div class="coverflow-card" data-category="award" data-tags="celestia blindcode nexverse fest competition coding tech event" data-file="certificates/celestia-1.O.jpg" data-title="Celestia 1.0 — Blindcode Competition" data-sub="17 Apr 2025 • NexVerse & Dept. of CS, IITM" data-pill="#Celestia" data-type="Tech Fest — Blind Coding Competition" data-org="NexVerse & Department of Computer Science, IITM Janakpuri (GGSIPU)" data-date="17 April 2025" data-position="Participant — Blindcode" data-detail="This certifies that Rashmi actively participated in 'Blindcode' at Celestia 1.0, organized by NexVerse IITM in collaboration with the Department of Computer Science, IITM — a blind-coding challenge where programs must be written without on-screen feedback.">
+                <span class="plate-index-badge">23</span>
+                <img src="certificates/thumb/celestia-1.O.jpg" alt="Celestia 1.0" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Celestia 1.0 Fest</h3>
+                  <p class="plate-sub">Inter-College Competition & Showcase</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Celestia</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 24. Hunt Safari -->
+              <div class="coverflow-card" data-category="hackathon" data-tags="hunt safari treasure hunt itrang dbit don bosco tech hunt clues" data-file="certificates/hunt safari.jpg" data-title="Treasure Hunt — ITRANG'25 (DBIT)" data-sub="21–22 Feb 2025 • Don Bosco Institute of Tech." data-pill="#HuntSafari" data-type="IT Fest — Treasure Hunt Competition" data-org="Don Bosco Institute of Technology (DBIT), Okhla Road, New Delhi" data-date="21–22 February 2025" data-position="2nd Runner-Up — Treasure Hunt" data-detail="Certificate of Appreciation certifying that Ms. Rashmi of IITM secured the 2nd Runner-Up position in the Treasure Hunt event at ITRANG'25 — the Annual Cultural & IT Fest of Don Bosco Institute of Technology, Okhla Road, New Delhi, held on 21–22 February 2025.">
+                <span class="plate-index-badge">24</span>
+                <img src="certificates/thumb/hunt%20safari.jpg" alt="Hunt Safari" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Hunt Safari Tech Hunt</h3>
+                  <p class="plate-sub">Algorithmic Clues & Debugging</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Debugging</span>
+                    <span class="plate-pill">#Logic</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 25. Fiesta Coordination -->
+              <div class="coverflow-card" data-category="award" data-tags="fiesta 2k26 event coordinator technical society aiec fest leadership" data-file="certificates/fiesta.jpg" data-title="Fiesta 2K26 — Coordinator Appreciation" data-sub="15 Apr 2026 • IITM Group of Institutions" data-pill="#Coordinator" data-type="Annual Fest — Organizing Role" data-org="IITM Group of Institutions (Director ICE, IITM-D29, JGCL)" data-date="15 April 2026" data-position="Coordinator — Certificate of Appreciation" data-detail="This Certificate of Appreciation is awarded to Rashmi, student of IITM (BCA), for their contribution as Coordinator at the Annual Fest Fiesta 2K26 organized by IITM Group of Institutions on April 15, 2026.">
+                <span class="plate-index-badge">25</span>
+                <img src="certificates/thumb/fiesta.jpg" alt="Fiesta" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Fiesta Event Coordinator</h3>
+                  <p class="plate-sub">AIEC Technical Society Leadership</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#AIEC</span>
+                    <span class="plate-pill">#Coordinator</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 26. Technical Project Exhibition -->
+              <div class="coverflow-card" data-category="research" data-tags="maths exhibition school level first prize gskv academics showcase" data-file="certificates/exhibition.jpg" data-title="Maths Exhibition — 1st Position (School)" data-sub="Session 2023–24 • GSKV No. 2, Yamuna Vihar, Delhi" data-pill="#FirstPrize" data-type="School-Level Exhibition — 1st Prize" data-org="GSKV No. 2, C-Block, Yamuna Vihar, Delhi-110053 (School ID 1104024)" data-date="Session 2023–24 (Class XII-A)" data-position="1st Position — Maths Exhibition" data-detail="Certificate of Appreciation awarded to Miss Rashmi (Daughter of Smt. Kailash Pati), Class XII-A, for participating in the school-level Maths Exhibition and other academic activities — she secured the 1st Position.">
+                <span class="plate-index-badge">26</span>
+                <img src="certificates/thumb/exhibition.jpg" alt="Exhibition" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Technical Project Exhibition</h3>
+                  <p class="plate-sub">Working Prototype Demonstration</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Prototype</span>
+                    <span class="plate-pill">#Showcase</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 27. FEA Training Part 1 -->
+              <div class="coverflow-card" data-category="workshop" data-tags="fea ka-ching winner module 11 great barrier reef teamwork communication" data-file="certificates/fea1.jpg" data-title="FEA 'KA-CHING!' Winner — Module 11" data-sub="16 Apr 2022 • The Great Barrier Reef Event" data-pill="#Kaching" data-type="Team Culmination Event — Winner" data-org="Freedom Employability Academy (FEA)" data-date="16 April 2022" data-position="WINNER — KA-CHING! (Module 11, Advanced Program)" data-detail="Award Certificate to the WINNER of 'KA-CHING!' — the culmination event of Module 11 of the FEA Advanced Program ('The Great Barrier Reef'), awarded to the team including Rashmi Jaiswal. Signed by Rupesh Chaudhary, DL Facilitator.">
+                <span class="plate-index-badge">27</span>
+                <img src="certificates/thumb/fea1.jpg" alt="FEA 1" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">FEA Professional Training (Part 1)</h3>
+                  <p class="plate-sub">Leadership & Communication</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#FEA</span>
+                    <span class="plate-pill">#Leadership</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 28. FEA Training Part 2 -->
+              <div class="coverflow-card" data-category="workshop" data-tags="fea certificate honors one year program english computer skills personality ethics grit" data-file="certificates/fea2.jpg" data-title="FEA Certificate of Honors (1-Year Program)" data-sub="19 May 2022 • Freedom Employability Academy" data-pill="#FEAHonors" data-type="1-Year Employability Program — Honors" data-org="Freedom Employability Academy (FEA), Novato CA & New Delhi" data-date="19 May 2022" data-position="Certificate of Honors — Completed with Honors" data-detail="This certifies that Rashmi Jaiswal has successfully completed Freedom Employability Academy's one-year program of English, Computer & Internet Skills, Personality Development, Growth Mindset, Grit, Ethics, Collaboration & Adaptability — with Honors. Signed by Deepa Chopra, Founder/CEO.">
+                <span class="plate-index-badge">28</span>
+                <img src="certificates/thumb/fea2.jpg" alt="FEA 2" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">FEA Professional Training (Part 2)</h3>
+                  <p class="plate-sub">Advanced Collaboration Skills</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Teamwork</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 29. Koonnet Technical Credential -->
+              <div class="coverflow-card" data-category="corporate" data-tags="koonnect korean language kpop culture exchange ambassador international" data-file="certificates/koonnet.jpg" data-title="Koonnect Ambassadors — Korean Culture Course" data-sub="22 Apr – 20 May 2022 • 5-Week Program" data-pill="#Koonnect" data-type="International Cultural Exchange Course" data-org="Koonnect Ambassadors (Chairman Brian Ann)" data-date="22 April – 20 May 2022" data-position="5-Week Course Completion — Korean Class, K-pop & Culture Exchange" data-detail="This certifies that Rashmi has successfully completed the required 5-week course of Korean class, K-pop class and Culture Exchange with Koreans with great achievement and private diplomacy — awarded the Koonnect Ambassadors Certificate on 2022-05-20.">
+                <span class="plate-index-badge">29</span>
+                <img src="certificates/thumb/koonnet.jpg" alt="Koonnet" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Koonnet Technical Certification</h3>
+                  <p class="plate-sub">Modern Computer Applications</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Networking</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 30. Summer Training Program -->
+              <div class="coverflow-card" data-category="workshop" data-tags="summer training data science machine learning python so infotech itjm internship" data-file="certificates/trainning1.jpg" data-title="Summer Training — Data Science & ML using Python" data-sub="16 Jun – 26 Jul 2025 • S.O Infotech × IITM" data-pill="#SummerTraining" data-type="6-Week Summer Training Program" data-org="S.O Infotech (Pulsating Technologies) & IITM, Janakpuri, Delhi" data-date="16 June – 26 July 2025" data-position="Certificate of Training Completion (Code: SOINFO2025)" data-detail="Rashmi successfully completed 6 weeks of summer training on 'Data Science and Machine Learning using Python' from 16th June 2025 to 26th July 2025 at the Institute of Information Technology & Management, signed by Mr. Nitin Mehta (Director, S.O Infotech), Prof. Ganesh Kr. Wadhwani (HOD-CS) and Prof. Rachita Rana (Director, IITM).">
+                <span class="plate-index-badge">30</span>
+                <img src="certificates/thumb/trainning1.jpg" alt="Training" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Technical Summer Training</h3>
+                  <p class="plate-sub">Project-Driven Engineering Program</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Internship</span>
+                    <span class="plate-pill">#Engineering</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 31. Senior Secondary Academic Merit -->
+              <div class="coverflow-card" data-category="research" data-tags="extempore project voices english speaking 1st winner school gskv academic" data-file="certificates/english-12th.jpg" data-title="Project Voices & Extempore — 1st / Winner" data-sub="Session 2023–24 • GSKV No. 2, Yamuna Vihar, Delhi" data-pill="#EnglishWinner" data-type="School-Level Elocution — 1st Position" data-org="GSKV No. 2, C-Block, Yamuna Vihar, Delhi-110053 (Class XII-A)" data-date="Session 2023–24" data-position="1st / Winner — Project Voices & Extempore (English)" data-detail="Certificate of Appreciation awarded to Miss Rashmi (Class 12th-A), daughter of Smt. Kailash Pati, for participating in 'Project Voices' and Extempore (English) — she secured the 1st / Winner position.">
+                <span class="plate-index-badge">31</span>
+                <img src="certificates/thumb/english-12th.jpg" alt="English 12th" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Class XII Academic Merit</h3>
+                  <p class="plate-sub">Academic Proficiency & Honors</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Merit</span>
+                    <span class="plate-pill">#ClassXII</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 32. Certificate of Appreciation -->
+              <div class="coverflow-card" data-category="award" data-tags="bis quality standards quiz mygov consumer affairs government india participation" data-file="certificates/certificate.jpg" data-title="Quiz on Quality & Standards 2.0 (BIS / MyGov)" data-sub="Govt. of India National Quiz" data-pill="#BISQuiz" data-type="National Online Quiz (Govt. of India)" data-org="Bureau of Indian Standards, Dept. of Consumer Affairs, Govt. of India & MyGov" data-date="Quality and Standards 2.0 Campaign" data-position="Certificate of Participation" data-detail="This is to certify that Rashmi successfully participated in the 'Quiz on Quality and Standards 2.0' organized by the Bureau of Indian Standards (Dept. of Consumer Affairs, Govt. of India) in association with MyGov — appreciating enthusiasm and commendable efforts to participate.">
+                <span class="plate-index-badge">32</span>
+                <img src="certificates/thumb/certificate.jpg" alt="Certificate of Appreciation" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Certificate of Appreciation</h3>
+                  <p class="plate-sub">Service & Organizational Leadership</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Appreciation</span>
+                    <span class="plate-pill">#Service</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 33. Technical Course Completion -->
+              <div class="coverflow-card" data-category="award" data-tags="narcotics control bureau pledge say yes to life home affairs mygov social" data-file="certificates/download.jpeg" data-title="'Say Yes to Life, No to Drugs' Pledge" data-sub="26 Jun 2023 • Narcotics Control Bureau, MHA" data-pill="#NCBPledge" data-type="National Pledge Certificate (Govt. of India)" data-org="Narcotics Control Bureau, Ministry of Home Affairs, Govt. of India (with MyGov)" data-date="26 June 2023 (International Day Against Drug Abuse)" data-position="Pledge ID 7653494883 — Certified" data-detail="This is to certify that Rashmi has taken the 'Say Yes to Life, No to Drugs' pledge and committed himself/herself to consciously cooperate in stopping drug abuse and stay away from drugs to live a healthy life — issued by the Narcotics Control Bureau, Ministry of Home Affairs, Govt. of India.">
+                <span class="plate-index-badge">33</span>
+                <img src="certificates/thumb/download.jpg" alt="Coursework" loading="lazy">
+                <div class="coverflow-card-plate">
+                  <h3 class="plate-title">Technical Course Credential</h3>
+                  <p class="plate-sub">Software Architecture & Modules</p>
+                  <div class="plate-tags-row">
+                    <span class="plate-pill">#Coursework</span>
+                    <span class="plate-pill">#SoftwareDev</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Coverflow Nav Bar (controls only — description now lives in the full-preview modal) -->
+          <div class="coverflow-nav-bar">
+            <div class="coverflow-controls-row">
+              <button class="cf-nav-btn" id="cf-prev-btn" aria-label="Previous Certificate">
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+
+              <div class="cf-dash-indicators" id="cf-dash-indicators">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <button class="cf-nav-btn" id="cf-next-btn" aria-label="Next Certificate">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+
+            <div class="cf-gesture-hint">
+              <span>DRAG</span> • <span>SCROLL</span> • <span>ARROWS</span> • <span>CLICK TO EXPAND</span>
+            </div>
+          </div>
+        </div>  </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         PAGE 7: CONTACT SECTION (Floats up with Light Cream Beige & Dark Blue Text)
+         ========================================================================= -->
+    <section class="page-block theme-light-beige" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag"><i class="fa-solid fa-paper-plane"></i> Get in Touch</span>
+          <h2 class="section-title">Let's Work Together</h2>
+          <p class="section-subtitle">Open to full-stack &amp; AI/ML internships and collaborations — let's talk.</p>
+        </div>
+
+        <!-- Arcade break: an interactive mini-game before the contact details -->
+        <div class="arcade-feature" id="arcade-feature">
+          <div class="arcade-head">
+            <div class="arcade-title">
+              <span class="arcade-kicker"><i class="fa-solid fa-gamepad"></i> Interactive demo &middot; vanilla JavaScript</span>
+              <h3>Gun Game &mdash; Neon Shooting Range</h3>
+              <p class="arcade-sub">Come on &mdash; let's practice your aim.</p>
+            </div>
+            <button type="button" class="btn btn-sm btn-solid arcade-fullscreen" id="arcade-fullscreen" aria-label="Play Gun Game in full screen"><i class="fa-solid fa-expand"></i> Full screen</button>
+          </div>
+          <div class="arcade-frame">
+            <iframe id="arcade-iframe" src="game/gun-game.html?v=20261026h" title="Gun Game — Neon Shooting Range" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="cd-stage" id="cd-stage">
+          <p class="cd-hint">Here's every way to reach me — pick your favourite.</p>
+          <div class="cd-dock" id="cd-dock">
+            <nav class="cd-row" id="cd-row" aria-label="Contact links"></nav>
+          </div>
+        </div>
+
+        <!-- Radial Share Button — centered with clean breathing room -->
+        <div class="share-widget share-widget--center">
+          <span class="share-widget-label">Share this portfolio</span>
+          <div class="share-menu" id="share-menu">
+            <a class="share-item" href="https://wa.me/?text=Check%20out%20Rashmi's%20portfolio%20%E2%80%94%20https%3A%2F%2Frashmi-portfolio-final.netlify.app%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a class="share-item" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Frashmi-portfolio-final.netlify.app%2F" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a class="share-item" href="mailto:?subject=Rashmi's%20Portfolio&amp;body=Thought%20you'd%20enjoy%20this%3A%20https%3A%2F%2Frashmi-portfolio-final.netlify.app%2F" aria-label="Share by Email"><i class="fa-solid fa-envelope"></i></a>
+            <a class="share-item" href="https://twitter.com/intent/tweet?text=Check%20out%20Rashmi's%20portfolio%20https%3A%2F%2Frashmi-portfolio-final.netlify.app%2F" target="_blank" rel="noopener" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
+            <button class="share-item" id="share-copy" type="button" aria-label="Copy link"><i class="fa-solid fa-link"></i></button>
+            <button class="share-toggle" id="share-toggle" type="button" aria-label="Toggle share menu" aria-expanded="false"><i class="fa-solid fa-share-nodes"></i></button>
+          </div>
+          <span class="share-hint">Pick a channel to share</span>
+        </div>
+
+        <!-- Signature sign-off, in the same hand as the hero wordmark -->
+        <div class="contact-signature">
+          <span class="script">Rashmi Jaiswal</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Certificate Full-View Modal (image + complete description) -->
+  <div class="cert-modal" id="cert-modal" onclick="closeCertModal(event)">
+    <div class="cert-modal-content" onclick="event.stopPropagation()">
+      <button class="cert-modal-close" onclick="closeCertModal(event)" aria-label="Close modal">&times;</button>
+      <div class="cert-modal-body">
+        <div class="cert-modal-media">
+          <img id="cert-modal-img" src="" alt="Certificate Preview">
+          <iframe id="cert-modal-pdf" src="" title="Certificate PDF" frameborder="0"></iframe>
+        </div>
+        <aside class="cert-modal-info">
+          <span class="cdp-type" id="cm-type"></span>
+          <h4 id="cm-title"></h4>
+          <div class="cm-meta-list">
+            <div class="cm-meta"><i class="fa-solid fa-building"></i><div><span>Organization</span><strong id="cm-org"></strong></div></div>
+            <div class="cm-meta"><i class="fa-regular fa-calendar"></i><div><span>Date</span><strong id="cm-date"></strong></div></div>
+            <div class="cm-meta"><i class="fa-solid fa-medal"></i><div><span>Position / Role</span><strong id="cm-position"></strong></div></div>
+            <div class="cm-meta"><i class="fa-solid fa-tags"></i><div><span>Event Type</span><strong id="cm-event-type"></strong></div></div>
+          </div>
+          <p class="cm-desc" id="cm-desc"></p>
+          <a href="#gallery" class="btn btn-sm btn-outline cm-close-btn" onclick="closeCertModal(event, true)"><i class="fa-solid fa-xmark"></i> Close Preview</a>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <span class="brand-text">Rashmi.J</span>
+      </div>
+      <p class="copyright">© <span id="year-span"></span> Rashmi. BCA at GGSIPU. Crafted with clean architecture & modern web standards.</p>
+      <a href="#hero" class="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
+  <script src="js/perf.js?v=20261105o"></script>
+  <script src="js/app.js?v=20261105o"></script>
+  <script src="js/projects-showcase.js?v=20261105o"></script>
+  <script src="js/interactive.js?v=20261105o"></script>
+  <script src="js/stack.js?v=20261105o"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Preview / scratch screenshots generated during development
+.v-*.png
+.v2-*.png
+.v3-*.png
+.v4-*.png
+.v5-*.png
+.v6-*.jpg
+.verify-*.png
+_verify_*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# Node / build artefacts (if ever added)
+node_modules/
+dist/
+.env
