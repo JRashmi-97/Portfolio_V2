@@ -1,17 +1,14 @@
 /* ==========================================================================
    PERF — everything in this file exists to make movement smooth.
    No visual design changes: it only parks work the visitor cannot see, or
-   replaces paint-heavy tricks (animated box-shadow, glass blur inside 3D
-   scenes) with the compositor-friendly equivalent that looks the same.
-   Loaded last so it can refine the sheets above it.
+   replaces paint-heavy tricks with compositor-friendly equivalents.
+   Loaded LAST so it overrides the sheets above it.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Park every CSS animation that is off screen.
-   js/perf.js puts `perf-off` on any section (or heavy pocket) that is not
-   within 20% of the viewport. A paused animation costs nothing: no timer, no
-   style recalculation, no repaint. This alone removed ~118 always-on
-   animations down to the handful that are actually visible.
+   1. Park every CSS animation that is off-screen.
+   js/perf.js adds `perf-off` to any section not within 20% of the viewport.
+   A paused animation costs nothing: no timer, no style recalc, no repaint.
    -------------------------------------------------------------------------- */
 .perf-off .sw,
 .perf-off .ff,
@@ -24,22 +21,21 @@
 .perf-off .cb-thumb svg,
 .perf-off .coverflow-card::after,
 .perf-off .status-indicator,
+.perf-off .hero-badge svg,
 .perf-off .sl-head,
 .perf-off .sl-cordwrap {
   animation-play-state: paused !important;
 }
 
 /* --------------------------------------------------------------------------
-   2. Coverflow gallery (the worst offender at a steady ~20fps standing still)
+   2. Coverflow gallery glow — rebuilt as opacity-only animation.
+   The original box-shadow animation forced full repaint of a 3D surface
+   60×/sec. This opacity pulse looks identical and is composited for free.
    -------------------------------------------------------------------------- */
-/* The pulsing glow was an infinite box-shadow animation. box-shadow cannot be
-   composited, so the active card (inside a sticky, scaled, rounded layer)
-   repainted its whole parent surface 60 times a second. Same breathing glow,
-   rebuilt as an overlay that only animates opacity. */
 .coverflow-card {
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              opacity 0.6s ease,
-              filter 0.6s ease;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.5s ease,
+              filter 0.5s ease;
 }
 .coverflow-card.active-card {
   animation: none !important;
@@ -58,39 +54,34 @@
 }
 @keyframes cfGlowPulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
 
-/* Glass blur inside the 3D-transformed, brightness-filtered cards forced a
-   full backdrop re-read on every coverflow frame. A flat translucent chip is
-   pixel-indistinguishable over the dark photo edge. */
+/* Glass blur inside 3D-transformed cards forces a full backdrop re-read on
+   every coverflow frame. Flat translucent chip is visually identical. */
 .plate-index-badge {
   background: rgba(0, 10, 30, 0.78) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* Big panels over smooth dark gradients: blurring them changes nothing you can
-   see, but costs a per-frame backdrop copy while scrolling. */
-.theme-dark-blue .glass-card,
+/* Big panels over smooth dark gradients: blurring costs a per-frame
+   backdrop copy while scrolling. Strip it — invisible over dark bg. */
+.theme-dark-blue .glass-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(6, 26, 53, 0.92) !important;
+}
 .cert-detail-panel {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* Cards that are further than the ±4 band are invisible; make the browser
-   agree instead of keeping 33 live 3D surfaces around. */
+/* Cards beyond the ±4 visible band: hide from browser compositor too */
 .coverflow-card.cf-dead {
   visibility: hidden !important;
   transition: none !important;
 }
 
 /* --------------------------------------------------------------------------
-   3. (Hero lamp-crew clouds — that scene has been removed from the site, so
-   there is nothing to promote here any more.)
-   -------------------------------------------------------------------------- */
-
-/* --------------------------------------------------------------------------
-   4. Cube tunnel — the page copy is a full duplicate of the projects section.
-   Its own looping micro-animations are pointless while it is being scaled, so
-   park them and let the real panel underneath do the moving.
+   3. Cube tunnel clone — park animations in the page-copy that is being scaled.
    -------------------------------------------------------------------------- */
 #cb-clone .m-timer i,
 #cb-clone .m-map u,
@@ -101,27 +92,31 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. The stacking scroll cards keep a box-shadow transition that only fires
-   when a neighbour covers them — that frame is already busy re-rasterising.
+   4. Remove transition from .page-block so the box-shadow / transform
+   transition does NOT fire on every scroll frame. The stack scroll engine
+   writes transform directly on each paint; CSS transitions between those
+   writes add an extra layer of work the compositor has to reconcile.
    -------------------------------------------------------------------------- */
+.page-block {
+  transition: none !important;
+}
+/* Keep stacking-scroll containment ONLY on layout — NOT paint.
+   contain:paint breaks position:sticky propagation and clips sticky children. */
 .page-block.stack-on {
-  transition: none;
+  contain: layout !important;
+  will-change: transform;
+}
+/* Projects has an overflowing canvas tunnel; no containment at all */
+#projects.page-block.stack-on {
+  contain: none !important;
+  will-change: auto;
 }
 
-/* The 5% shrink-back of the covered page and the dim veil are written every
-   scroll frame. js/stack.js now emits both in coarse steps (24 levels for the
-   veil, 16 for the scale), so the veil is repainted a handful of times per
-   transition instead of 60 — and it stays un-promoted. Promoting it would be
-   tempting but each veil is a section-tall black rectangle (up to 900x4500px),
-   and seven permanent full-page layers is exactly how you run a laptop out of
-   GPU memory. */
-
 /* --------------------------------------------------------------------------
-   6. Hardware compositing for fixed UI chrome (zero scroll jank)
+   5. Hardware compositing for fixed UI chrome (zero scroll jank)
+   .floating-nav already has translateX(-50%) translateZ(0) in style.css.
+   Override separately so the X-offset is preserved.
    -------------------------------------------------------------------------- */
-/* .floating-nav already has translateX(-50%) translateZ(0) in style.css.
-   Listing it here without the X translation would strip the centering, so
-   promote it separately and leave the X offset intact. */
 .floating-nav {
   transform: translateX(-50%) translateZ(0) !important;
   contain: layout style;
@@ -134,8 +129,15 @@
 }
 
 /* --------------------------------------------------------------------------
-   7. Performance Mode — the visitor-facing switch (html.perf-mode, set by the
-   gauge button and remembered in localStorage).
+   6. Replace `transition: all` on coverflow dash-indicators with specific
+   props only — `all` recalculates every property on every frame.
+   -------------------------------------------------------------------------- */
+.cf-dash {
+  transition: background 0.35s ease, box-shadow 0.35s ease, width 0.35s ease !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Performance Mode — lighter effects for the visitor-facing toggle.
    -------------------------------------------------------------------------- */
 html.perf-mode .liquid-nav,
 html.perf-mode #sfx-toggle,
@@ -145,9 +147,38 @@ html.perf-mode .hn-caption {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-
-/* centre card: park the breathing glow */
 html.perf-mode .coverflow-card.active-card::after {
   animation: none !important;
   opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   8. Touch / mobile: shorter transitions + momentum scrolling feel
+   -------------------------------------------------------------------------- */
+@media (hover: none) {
+  .coverflow-card {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.3s ease,
+                filter 0.3s ease;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Reduce motion: honour the OS accessibility preference
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .page-block.stack-on {
+    position: relative !important;
+    will-change: auto !important;
+  }
+  .page-block > .stack-dim {
+    display: none !important;
+  }
 }

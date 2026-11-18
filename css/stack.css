@@ -23,13 +23,7 @@ main {
   position: sticky !important;
   /* `top` is set per-section in JS (beats #about { position: relative }) */
   transform-origin: 50% 0;
-  contain: layout paint;
-  will-change: transform;
-}
-
-#projects.page-block.stack-on {
-  contain: layout;
-  will-change: auto;
+  /* contain and will-change are managed by perf.css which loads after this */
 }
 
 /* dim overlay that deepens as the next page covers this one */

@@ -6,24 +6,26 @@
   <title>Rashmi | Full-Stack Developer & AI/ML Engineer</title>
   <meta name="description" content="Portfolio of Rashmi - BCA student at GGSIPU (CGPA 9.45), Full-Stack Developer and AI/ML Engineer with IBM & NASSCOM internship, national hackathon wins, and 30+ verified credentials.">
   
-  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <!-- Preconnect to external origins early so handshakes happen during HTML parse -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Anton&family=Playwrite+US+Trad:wght@100..400&family=JetBrains+Mono:wght@500&family=Nunito:wght@800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=20261105o">
-  <!-- Interactive sections: Skills periodic table, Projects cube tunnel, Pixel Breakout -->
-  <link rel="stylesheet" href="css/interactive.css?v=20261105o">
-  <!-- Mobile / tablet responsive refinements (layered last, desktop untouched) -->
-  <link rel="stylesheet" href="css/responsive.css?v=20261105o">
-  <link rel="stylesheet" href="css/stack.css?v=20261105o">
-  <link rel="stylesheet" href="css/projects.css?v=20261105o">
-  <!-- PERF: loaded last. Parks off-screen animation work, no design changes -->
-  <link rel="stylesheet" href="css/perf.css?v=20261105o">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <!-- Google Fonts: only used weights + display=swap avoids render-blocking -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Anton&family=Playwrite+US+Trad:wght@100..400&family=JetBrains+Mono:wght@500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome: deferred via media=print trick so it never blocks first paint -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+
+  <!-- Stylesheets — versioned to bust cache after every update -->
+  <link rel="stylesheet" href="css/style.css?v=20261118">
+  <link rel="stylesheet" href="css/interactive.css?v=20261118">
+  <link rel="stylesheet" href="css/responsive.css?v=20261118">
+  <link rel="stylesheet" href="css/stack.css?v=20261118">
+  <link rel="stylesheet" href="css/projects.css?v=20261118">
+  <!-- PERF: loaded last — parks off-screen animations, no design changes -->
+  <link rel="stylesheet" href="css/perf.css?v=20261118">
 
   <!-- No-JS fallback: hide intro, show hero -->
   <noscript><style>.intro{display:none!important}#cursor-dot{display:none!important}.brand-script{opacity:1!important;pointer-events:auto!important}.brand-script .brand-word{clip-path:none!important}.brand-script .brand-pen{display:none!important}.hero-status-pill,.hero-title,.hero-role,.hero-description,.hero-stats,.dr-wrap{opacity:1!important;animation:none!important}.hero-arch{opacity:1!important;transform:none!important}.arch-plate{opacity:1!important}.role-rot>span:first-child{opacity:1!important;transform:none!important}</style></noscript>

@@ -65,9 +65,13 @@
   }
 
   var tick = false;
+  var lastScrollY = -1;
   function paint() {
     tick = false;
     var sy = window.pageYOffset;
+    // Skip paint if scroll position hasn't changed (avoids redundant style writes)
+    if (sy === lastScrollY) return;
+    lastScrollY = sy;
     var n = blocks.length;
     for (var i = 0; i < n; i++) {
       var b = blocks[i], p = 0;
