@@ -438,7 +438,10 @@
       if (stageEl) put(wr, 'vis', p >= .9995 ? 'hidden' : '', stageEl, 'visibility');
       /* the streak field is decoration: half rate is indistinguishable and frees
          every other frame for the scroll itself */
-      if (p < .93 && now - lastWarp >= 32) { lastWarp = now; var a = smooth((p - .33) / .05) * (1 - smooth((p - .8) / .12)); warp(p, t, a, Math.max(sPage, .05)); }
+      /* On touch devices halve the warp-canvas frame rate (32 ms → 64 ms)
+         so the main thread has more breathing room between frames. */
+      var warpInterval = window.matchMedia('(hover: none)').matches ? 64 : 32;
+      if (p < .93 && now - lastWarp >= warpInterval) { lastWarp = now; var a = smooth((p - .33) / .05) * (1 - smooth((p - .8) / .12)); warp(p, t, a, Math.max(sPage, .05)); }
     }
     var t0 = performance.now();
     var rzf = 0;

@@ -153,13 +153,99 @@ html.perf-mode .coverflow-card.active-card::after {
 }
 
 /* --------------------------------------------------------------------------
-   8. Touch / mobile: shorter transitions + momentum scrolling feel
+   8. Touch / mobile: shorter transitions + compositor-friendly overrides.
+   On mobile GPUs backdrop-filter blur is the single biggest frame-budget
+   killer: each blurred element forces the browser to copy, blur, and
+   composite a full texture every paint frame. We replace them with
+   opaque/semi-opaque flat backgrounds — visually indistinguishable on
+   a small OLED display but orders of magnitude cheaper.
    -------------------------------------------------------------------------- */
 @media (hover: none) {
+  /* ── Shorter coverflow transitions ─────────────────────────── */
   .coverflow-card {
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 opacity 0.3s ease,
                 filter 0.3s ease;
+  }
+
+  /* ── Strip ALL non-nav backdrop-filter blurs ────────────────── */
+  /* gallery overlay (shows on tap, not hover — dark bg is enough) */
+  .gallery-overlay {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(0, 20, 45, 0.88) !important;
+  }
+  /* coverflow badge chip */
+  .plate-index-badge {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* coverflow nav buttons */
+  .cf-nav-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(2, 20, 48, 0.88) !important;
+  }
+  /* cert detail panel */
+  .cert-detail-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(2, 20, 48, 0.92) !important;
+  }
+  /* cert modal overlay */
+  .cert-modal {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* glass cards */
+  .theme-dark-blue .glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* liquid nav (contact section tab switcher) */
+  .liquid-nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(2, 20, 48, 0.88) !important;
+  }
+  /* hero nav caption pill */
+  .hn-caption {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(23, 23, 28, 0.82) !important;
+  }
+
+  /* ── Hero badge: drop-shadow on a spinning element forces compositing ── */
+  .hero-badge {
+    filter: none !important;
+  }
+
+  /* ── Experience flower: 60+ simultaneous animations. Halve their      ── */
+  /*    speed on mobile so the browser has 2× longer between repaints.   ── */
+  .sw, .ff, .stem, .fl, .bloom, .leaf, .round, .gb {
+    animation-duration: calc(var(--dur, 2s) * 2) !important;
+  }
+
+  /* ── Page-level touch-action hint: tell the browser that our custom   ── */
+  /*    JS never calls preventDefault on vertical scroll, so it can      ── */
+  /*    dispatch scroll events instantly without the 300 ms wait.        ── */
+  .page-block,
+  .coverflow-container,
+  .gallery-grid,
+  .contact-wrapper {
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /* ── Coverflow: disable brightness filter on non-active cards on      ── */
+  /*    mobile — filter on 3D-transformed elements creates a new         ── */
+  /*    stacking context and prevents GPU layer sharing.                 ── */
+  .coverflow-card:not(.active-card) {
+    filter: none !important;
+  }
+
+  /* ── image-rendering hint for coverflow certificate images ────────── */
+  .coverflow-card img {
+    image-rendering: optimizeSpeed;
   }
 }
 

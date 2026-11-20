@@ -576,8 +576,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.touches && e.touches[0]) { hx = e.touches[0].clientX; hy = e.touches[0].clientY; queueHc(); }
     }, { passive: true });
 
-    // mobile: no cursor, so use the device tilt (gyroscope) to move the eyes
+    // mobile: no cursor, so use the device tilt (gyroscope) to move the eyes.
+    // Throttled to once every 100 ms so it cannot block the scroll thread on
+    // budget phones that fire deviceorientation at 60 Hz.
+    let _doLast = 0;
     window.addEventListener('deviceorientation', (e) => {
+      const now = performance.now();
+      if (now - _doLast < 100) return;          // 10 fps throttle
+      _doLast = now;
       if (!lit || (e.gamma == null && e.beta == null) || !heroOn()) return;
       const sr = hcStage.getBoundingClientRect();
       const g = Math.max(-45, Math.min(45, e.gamma || 0)) / 45;                 // left/right tilt
