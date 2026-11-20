@@ -66,6 +66,10 @@
 
   var tick = false;
   var lastScrollY = -1;
+  /* On touch devices, writing scale() on every section every scroll frame
+     creates 4+ compositing layers that must be re-blended each paint.
+     The dim-overlay opacity alone gives sufficient depth cue on mobile. */
+  var isTouchDevice = window.matchMedia && window.matchMedia('(hover: none)').matches;
   function paint() {
     tick = false;
     var sy = window.pageYOffset;
@@ -87,8 +91,8 @@
         if (dims[i]) dims[i].style.opacity = curDim;
       }
 
-      // 2. Smooth GPU composited scale shrink for screen-fitting cards (exempt #projects)
-      if (b.id !== 'projects') {
+      // 2. Smooth GPU composited scale shrink (desktop only — skipped on touch)
+      if (!isTouchDevice && b.id !== 'projects') {
         if (hs[i] <= vh + 120) {
           var s = (1 - p * 0.045).toFixed(4);
           if (s !== lastScale[i]) {

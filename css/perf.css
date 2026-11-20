@@ -153,99 +153,156 @@ html.perf-mode .coverflow-card.active-card::after {
 }
 
 /* --------------------------------------------------------------------------
-   8. Touch / mobile: shorter transitions + compositor-friendly overrides.
-   On mobile GPUs backdrop-filter blur is the single biggest frame-budget
-   killer: each blurred element forces the browser to copy, blur, and
-   composite a full texture every paint frame. We replace them with
-   opaque/semi-opaque flat backgrounds — visually indistinguishable on
-   a small OLED display but orders of magnitude cheaper.
+   8. Touch / mobile: aggressive compositing & animation optimisations.
+   On mobile GPUs the frame budget is ~8 ms. Every backdrop-filter, infinite
+   animation, box-shadow animation, and `transition: all` recalculation eats
+   into that budget. This block eliminates or cheapens all of them without
+   changing any visual design.
    -------------------------------------------------------------------------- */
 @media (hover: none) {
-  /* ── Shorter coverflow transitions ─────────────────────────── */
-  .coverflow-card {
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                opacity 0.3s ease,
-                filter 0.3s ease;
+
+  /* ══════════════════════════════════════════════════════════════
+     A. REPLACE `transition: all` WITH SPECIFIC PROPERTIES ONLY
+        `all` recalculates EVERY CSS property on every hover/focus
+        event. On mobile this means 100+ property checks per touch.
+        Replace with only the properties that actually animate.
+     ══════════════════════════════════════════════════════════════ */
+  * {
+    /* Override the global --transition: all 0.3s variable */
+    --transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease !important;
   }
 
-  /* ── Strip ALL non-nav backdrop-filter blurs ────────────────── */
-  /* gallery overlay (shows on tap, not hover — dark bg is enough) */
+  /* ══════════════════════════════════════════════════════════════
+     B. STRIP ALL BACKDROP-FILTER BLURS (biggest GPU killer)
+        Each blurred element forces a full texture copy + blur every
+        paint frame — 60× per second during scroll = frame budget gone.
+     ══════════════════════════════════════════════════════════════ */
   .gallery-overlay {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(0, 20, 45, 0.88) !important;
   }
-  /* coverflow badge chip */
   .plate-index-badge {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-  /* coverflow nav buttons */
   .cf-nav-btn {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(2, 20, 48, 0.88) !important;
   }
-  /* cert detail panel */
   .cert-detail-panel {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(2, 20, 48, 0.92) !important;
   }
-  /* cert modal overlay */
   .cert-modal {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-  /* glass cards */
   .theme-dark-blue .glass-card {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-  /* liquid nav (contact section tab switcher) */
   .liquid-nav {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(2, 20, 48, 0.88) !important;
   }
-  /* hero nav caption pill */
   .hn-caption {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     background: rgba(23, 23, 28, 0.82) !important;
   }
 
-  /* ── Hero badge: drop-shadow on a spinning element forces compositing ── */
+  /* ══════════════════════════════════════════════════════════════
+     C. STOP ALL INFINITE ANIMATIONS NOT IN perf-off SCOPE
+        Infinite box-shadow / filter animations re-paint the element
+        every frame even when nothing on screen has changed.
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Coverflow active-card infinite box-shadow glow → park it */
+  .coverflow-card.active-card {
+    animation: none !important;
+  }
+  /* Projects floating feature thumb — 5.5 s infinite float */
+  .cb-feature .cb-thumb {
+    animation: none !important;
+  }
+  /* Projects bento cards drift gradient — 9 s infinite */
+  .cbv-navy, .cbv-blue {
+    animation: none !important;
+  }
+  /* Status dot pulse — keep it but slow it */
+  .status-indicator {
+    animation-duration: 3s !important;
+  }
+  /* Hero badge spin — slow it from 16 s → 24 s, still visible */
+  .hero-badge svg {
+    animation-duration: 24s !important;
+  }
+  /* Hero badge drop-shadow forces compositing on a spinning element */
   .hero-badge {
     filter: none !important;
   }
-
-  /* ── Experience flower: 60+ simultaneous animations. Halve their      ── */
-  /*    speed on mobile so the browser has 2× longer between repaints.   ── */
+  /* Experience flower sway/float — halve speed */
   .sw, .ff, .stem, .fl, .bloom, .leaf, .round, .gb {
     animation-duration: calc(var(--dur, 2s) * 2) !important;
   }
 
-  /* ── Page-level touch-action hint: tell the browser that our custom   ── */
-  /*    JS never calls preventDefault on vertical scroll, so it can      ── */
-  /*    dispatch scroll events instantly without the 300 ms wait.        ── */
+  /* ══════════════════════════════════════════════════════════════
+     D. COVERFLOW GALLERY — lighter 3D on mobile
+     ══════════════════════════════════════════════════════════════ */
+
+  /* Shorter transitions (was 0.5 s → 0.25 s) */
+  .coverflow-card {
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.25s ease !important;
+    /* No filter transition — filter on 3D elements prevents GPU layer sharing */
+    filter: none !important;
+  }
+  /* Dead-band cards already hidden by perf.css; also kill their filter */
+  .coverflow-card.cf-dead {
+    filter: none !important;
+  }
+  /* image-rendering hint saves the texture-upload time per certificate */
+  .coverflow-card img {
+    image-rendering: optimizeSpeed;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     E. REMOVE WILL-CHANGE FROM ELEMENTS NOT BEING ANIMATED NOW
+        Every `will-change: transform` steals a GPU compositing layer
+        for the life of the element. 10+ layers = GPU memory pressure.
+     ══════════════════════════════════════════════════════════════ */
+  .hc-char, .hc-sway, .hero-arch, .arch-plate {
+    will-change: auto !important;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     F. TOUCH-ACTION HINT — 0 ms scroll latency
+        Without this the browser waits 300 ms after every touch to
+        check if the JS will call preventDefault. `pan-y` removes the wait.
+     ══════════════════════════════════════════════════════════════ */
+  html, body,
   .page-block,
   .coverflow-container,
   .gallery-grid,
-  .contact-wrapper {
+  .contact-wrapper,
+  .cb-projects {
     touch-action: pan-y pinch-zoom;
   }
 
-  /* ── Coverflow: disable brightness filter on non-active cards on      ── */
-  /*    mobile — filter on 3D-transformed elements creates a new         ── */
-  /*    stacking context and prevents GPU layer sharing.                 ── */
-  .coverflow-card:not(.active-card) {
-    filter: none !important;
-  }
-
-  /* ── image-rendering hint for coverflow certificate images ────────── */
-  .coverflow-card img {
-    image-rendering: optimizeSpeed;
+  /* ══════════════════════════════════════════════════════════════
+     G. STACK SCROLL ENGINE — disable scale transform on mobile
+        The JS writes `scale(0.955…)` on every scroll frame for every
+        section. On desktop this is composited for free. On mobile with
+        4+ sections it creates 4 compositing layers that must all be
+        re-blended every frame. Skip it on touch: the dim-overlay alone
+        gives enough depth cue.
+     ══════════════════════════════════════════════════════════════ */
+  .page-block.stack-on {
+    will-change: opacity !important;
   }
 }
 
