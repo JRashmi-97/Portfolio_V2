@@ -332,7 +332,8 @@
     var sd = 3; var R = function () { sd = (sd + 0x6D2B79F5) | 0; var t = Math.imul(sd ^ sd >>> 15, 1 | sd); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
     var PAL = ['#f6efe0', '#e9d9b8', '#bcd3ff', '#5b8def', '#ffffff', '#005d9e'];
     var warpBlank = true;
-    var S = Array.from({ length: 260 }, function () { return { a: R() * 6.283, r: .04 + Math.sqrt(R()) * 1.1, z: R(), c: Math.floor(R() * PAL.length), w: .5 + R() * 1.2 }; });
+    var starCount = (window.matchMedia && window.matchMedia('(hover: none)').matches) ? 80 : 130;
+    var S = Array.from({ length: starCount }, function () { return { a: R() * 6.283, r: .04 + Math.sqrt(R()) * 1.1, z: R(), c: Math.floor(R() * PAL.length), w: .5 + R() * 1.2 }; });
     var FRAME_COLORS = ['#e9d9b8', '#5b8def', '#f6efe0', '#005d9e'];
     if (!CanvasRenderingContext2D.prototype.roundRect) { CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h) { this.rect(x, y, w, h); }; }
     function warp(p, t, alpha, sPage) {
@@ -352,14 +353,13 @@
         cx.globalAlpha = alpha * Math.pow(1 - z, 1.1) * .95; cx.strokeStyle = PAL[s.c]; cx.lineWidth = .5 + s.w * (1 - z) * 2;
         cx.beginPath(); cx.moveTo(x1, y1); cx.lineTo(x2, y2); cx.stroke();
       }
-      cx.shadowBlur = 14;
       for (var j = 1; j <= 9; j++) {
         var sc = sPage * Math.pow(1.42, j); if (sc > 3.6) continue;
         var col = FRAME_COLORS[j % 4], w = W * sc * .92, h = H * sc * .92;
-        cx.globalAlpha = alpha * clamp(1 - (sc - 1.4) / 2.2) * .9; cx.strokeStyle = col; cx.shadowColor = col; cx.lineWidth = 1.2 + Math.min(3, sc * 1.4);
+        cx.globalAlpha = alpha * clamp(1 - (sc - 1.4) / 2.2) * .9; cx.strokeStyle = col; cx.lineWidth = 1.2 + Math.min(3, sc * 1.4);
         cx.strokeRect(mx - w / 2, my - h / 2, w, h);
       }
-      cx.shadowBlur = 0; cx.globalAlpha = 1;
+      cx.globalAlpha = 1;
     }
 
     function smooth(t) { t = clamp(t); return t * t * (3 - 2 * t); }
@@ -430,7 +430,6 @@
           put(wr, 'clT', 'perspective(1400px) rotateX(' + ((1 - q) * 16).toFixed(1) + 'deg) rotateY(' +
             ((1 - q) * -10).toFixed(1) + 'deg) scale(' + sPage.toFixed(4) + ')', clone, 'transform');
           put(wr, 'rad', Math.round(26 * (1 - q) / 2) * 2 + 'px', clone, 'borderRadius');
-          put(wr, 'glow', '0 0 ' + Math.round(50 * (1 - q) / 8) * 8 + 'px rgba(143,184,255,' + (Math.round(.7 * (1 - q) * 10) / 10) + ')', clone, 'boxShadow');
         }
       }
       if (pgrid) put(wr, 'pg', (1 - smooth((q - .45) / .4)).toFixed(2), pgrid, 'opacity');

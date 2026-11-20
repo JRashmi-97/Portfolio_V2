@@ -74,10 +74,41 @@
   -webkit-backdrop-filter: none !important;
 }
 
-/* Cards beyond the ±4 visible band: hide from browser compositor too */
+/* Cards beyond the active visible band: completely removed from layout & paint tree (list virtualization) */
 .coverflow-card.cf-dead {
+  display: none !important;
   visibility: hidden !important;
   transition: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Native Content Virtualization:
+   Tells the browser engine to skip layout & paint for off-screen items
+   until they are actively entering the viewport buffer.
+   -------------------------------------------------------------------------- */
+.timeline-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 160px;
+}
+.gallery-thumb {
+  content-visibility: auto;
+  contain-intrinsic-size: 180px;
+}
+.cb-grid .cb-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+#arcade-feature {
+  content-visibility: auto;
+  contain-intrinsic-size: 480px;
+}
+.pt-board {
+  content-visibility: auto;
+  contain-intrinsic-size: 520px;
+}
+.cd-stage {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
 }
 
 /* --------------------------------------------------------------------------
@@ -104,7 +135,7 @@
    contain:paint breaks position:sticky propagation and clips sticky children. */
 .page-block.stack-on {
   contain: layout !important;
-  will-change: transform;
+  will-change: auto !important;
 }
 /* Projects has an overflowing canvas tunnel; no containment at all */
 #projects.page-block.stack-on {

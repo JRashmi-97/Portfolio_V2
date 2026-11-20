@@ -66,10 +66,6 @@
 
   var tick = false;
   var lastScrollY = -1;
-  /* On touch devices, writing scale() on every section every scroll frame
-     creates 4+ compositing layers that must be re-blended each paint.
-     The dim-overlay opacity alone gives sufficient depth cue on mobile. */
-  var isTouchDevice = window.matchMedia && window.matchMedia('(hover: none)').matches;
   function paint() {
     tick = false;
     var sy = window.pageYOffset;
@@ -78,31 +74,17 @@
     lastScrollY = sy;
     var n = blocks.length;
     for (var i = 0; i < n; i++) {
-      var b = blocks[i], p = 0;
+      var p = 0;
       if (i < n - 1) {
         p = 1 - (nat[i + 1] - sy) / vh;
         p = Math.max(0, Math.min(1, p));
       }
 
-      // 1. Direct GPU opacity on the dim overlay (zero style invalidation on the section)
-      var curDim = +(p * 0.55).toFixed(3);
+      // Direct GPU opacity on the dim overlay (zero style invalidation on the section body)
+      var curDim = +(p * 0.55).toFixed(2);
       if (curDim !== lastDim[i]) {
         lastDim[i] = curDim;
         if (dims[i]) dims[i].style.opacity = curDim;
-      }
-
-      // 2. Smooth GPU composited scale shrink (desktop only — skipped on touch)
-      if (!isTouchDevice && b.id !== 'projects') {
-        if (hs[i] <= vh + 120) {
-          var s = (1 - p * 0.045).toFixed(4);
-          if (s !== lastScale[i]) {
-            lastScale[i] = s;
-            b.style.transform = p > 0.002 ? 'scale(' + s + ')' : '';
-          }
-        } else if (lastScale[i] !== '1') {
-          lastScale[i] = '1';
-          b.style.transform = '';
-        }
       }
     }
   }
@@ -132,12 +114,9 @@
   var roTimer = 0;
   if (window.ResizeObserver) {
     var ro = new ResizeObserver(function () {
-      if (window.PERF && PERF.scrolling && PERF.scrolling()) {
-        clearTimeout(roTimer);
-        roTimer = setTimeout(relayout, 160);
-        return;
-      }
-      relayout();
+      if (window.PERF && PERF.scrolling && PERF.scrolling()) return;
+      clearTimeout(roTimer);
+      roTimer = setTimeout(relayout, 300);
     });
     blocks.forEach(function (b) { ro.observe(b); });
   }
